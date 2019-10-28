@@ -16,6 +16,11 @@ Check tensorflow serving project for details: https://tensorflow.github.io/servi
 ```
 * the desired version can be specified in the `VERSION` file
 
+### prerequisite
+
+Grpc tools are needed for building variant packages.
+Install `protobuf-compiler-grpc` on Ubuntu and `grpc` on macOS.
+
 ### build jar file
 ```
 gradle build
@@ -37,8 +42,10 @@ The library has been published in pypi.org under the name `tensorflow-serving-cl
 gradle cmake
 ```
 * `libtensorflow_serving_client.a` is located in `build/dist/lib/static`
+* **prerequisite:** `libprotobuf-dev` on Ubuntu and `protobuf` on macOS
 
 ### build npm tarball
 ```
 npm pack
 ```
+* `tensorflow_serving_client`
