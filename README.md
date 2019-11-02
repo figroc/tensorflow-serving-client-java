@@ -9,6 +9,7 @@ Currently supported build:
   * Python
   * Node
   * Go
+  * Mono
 
 Check tensorflow serving project for details: https://tensorflow.github.io/serving/
 
@@ -43,14 +44,14 @@ The library has been published in pypi.org under the name `tensorflow-serving-cl
 ```
 gradle cmake
 ```
-* `libtensorflow_serving_client.a` is located in `build/dist/lib/static`
+* `libtensorflow-serving-client.a` is located in `build/dist/lib/static`
 * **prerequisite:** `libprotobuf-dev` on Ubuntu and `protobuf` on macOS
 
 ### build node tarball
 ```
-npm pack
+gradle node
 ```
-* `tensorflow_serving_client` tarball is located in project root dir
+* `tensorflow-serving-client` tarball is located in `build/node`
 
 The library has been published in npmjs.com under the name `tensorflow-serving-client`
 
@@ -60,3 +61,9 @@ gradle golang
 ```
 * `tensorflow-serving-client` is located in `build/generated/source/proto/main/go`
 * **prerequisite:** `github.com/golang/protobuf/protoc-gen-go` for build
+
+### build mono library
+```
+gradle mono
+```
+* `tensorflow-serving-client` is located in `build/msbuild`

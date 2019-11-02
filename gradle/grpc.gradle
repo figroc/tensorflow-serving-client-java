@@ -1,0 +1,85 @@
+apply plugin: "com.google.protobuf"
+
+static def getGrpcPlugin(name) {
+  def path = "which grpc_${name}_plugin".execute()
+  path.waitFor()
+  return path.in.text.trim()
+}
+
+sourceSets {
+  main {
+    proto {
+      srcDir "proto"
+    }
+  }
+}
+
+protobuf {
+  protoc {
+    artifact = "com.google.protobuf:protoc:${vers.proto}"
+  }
+  plugins {
+    grpc_cpp {
+      path = getGrpcPlugin("cpp")
+    }
+    grpc_java {
+      artifact = "io.grpc:protoc-gen-grpc-java:${vers.grpc}"
+    }
+    grpc_python {
+      path = getGrpcPlugin("python")
+    }
+    grpc_csharp {
+      path = getGrpcPlugin("csharp")
+    }
+  }
+  generateProtoTasks {
+    all()*.builtins {
+      cpp { }
+      java { }
+      python { }
+      csharp { }
+    }
+    all()*.plugins {
+      grpc_cpp {
+        outputSubDir = "cpp"
+      }
+      grpc_java {
+        outputSubDir = "java"
+      }
+      grpc_python {
+        outputSubDir = "python"
+      }
+      grpc_csharp {
+        outputSubDir = "csharp"
+      }
+    }
+    all()["generateProto"].finalizedBy "finalizeProtoGrpc"
+  }
+}
+
+ext {
+  protoGenBaseDir = "${buildDir}/generated"
+  protoGenBaseRel = file(projectDir).toPath().relativize(file(protoGenBaseDir).toPath())
+  protoGenMainDir = "${protobuf.generatedFilesBaseDir}/main"
+  protoGenMainRel = file(projectDir).toPath().relativize(file(protoGenMainDir).toPath())
+  protoGenMainSub = file(protoGenBaseDir).toPath().relativize(file(protoGenMainDir).toPath())
+}
+
+task finalizeProtoGrpc {
+  dependsOn "generateProto"
+  inputs.dir protoGenMainDir
+  doLast {
+    delete {
+      delete fileTree("${protoGenMainDir}/cpp") {
+        include "**/*.grpc.pb.*"
+        exclude "**/*_service.grpc.pb.*"
+      }
+    }
+    delete {
+      delete fileTree("${protoGenMainDir}/python") {
+        include "**/*_pb2_grpc.py"
+        exclude "**/*_service_pb2_grpc.py"
+      }
+    }
+  }
+}

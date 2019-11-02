@@ -1,0 +1,20 @@
+task cmake {
+  dependsOn "generateProto"
+  ext {
+    distEnv = dist.plus([source: "${protoGenMainRel}/cpp"])
+  }
+  inputs.file "CMakeLists.txt"
+  inputs.dir distEnv.source
+  doLast {
+    exec {
+      workingDir "${buildDir}"
+      environment buildEnviron(distEnv)
+      commandLine "cmake", "-DCMAKE_INSTALL_PREFIX=", ".."
+    }
+    exec {
+      workingDir "${buildDir}"
+      environment buildEnviron(distEnv)
+      commandLine "make", "DESTDIR=dist", "install"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <Configuration>Release</Configuration>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <GenerateDocumentation>true</GenerateDocumentation>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(TFSCLIENT_DIST_SOURCE)/**/*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.10.0" />
+    <PackageReference Include="Grpc.Core" Version="2.24.0" />
+  </ItemGroup>
+  <PropertyGroup>
+    <Version>$(TFSCLIENT_DIST_VERSION)</Version>
+    <AssemblyName>$(TFSCLIENT_DIST_NAME)</AssemblyName>
+    <AssemblyTitle>$(TFSCLIENT_DIST_TITLE)</AssemblyTitle>
+    <Company>$(TFSCLIENT_DIST_AUTHOR_NAME)</Company>
+    <Description>$(TFSCLIENT_DIST_DESCRIPTION)</Description>
+    <BaseOutputPath>$(TFSCLIENT_DIST_OUTPUT)</BaseOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Title>$(TFSCLIENT_DIST_TITLE)</Title>
+    <Authors>$(TFSCLIENT_DIST_AUTHOR_NAME)</Authors>
+    <Owners>$(TFSCLIENT_DIST_AUTHOR_ID)</Owners>
+    <PackageLicenseExpression>$(TFSCLIENT_DIST_LICENSE)</PackageLicenseExpression>
+    <RepositoryUrl>$(TFSCLIENT_DIST_URL)</RepositoryUrl>
+  </PropertyGroup>
+</Project>

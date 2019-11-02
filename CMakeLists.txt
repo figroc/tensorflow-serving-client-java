@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(tensorflow-serving-client)
+project($ENV{TFSCLIENT_DIST_NAME})
 
 find_package(Protobuf REQUIRED)
 
@@ -10,15 +10,14 @@ else()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif()
 
-set(PROTO_GENERATED "${CMAKE_SOURCE_DIR}/build/generated/source/proto/main/cpp")
-file(STRINGS VERSION rVERSION)
+set(PROTO_GENERATED "${CMAKE_SOURCE_DIR}/$ENV{TFSCLIENT_DIST_SOURCE}")
 file(GLOB_RECURSE SOURCES "${PROTO_GENERATED}/*.cc")
 
 include_directories(${PROTO_GENERATED})
 include_directories(${PROTOBUF_INCLUDE_DIRS})
-add_library(tensorflow_serving_client STATIC ${SOURCES})
-set_target_properties(tensorflow_serving_client PROPERTIES VERSION ${rVERSION})
-target_link_libraries(tensorflow_serving_client ${PROTOBUF_LIBRARIES})
+add_library($ENV{TFSCLIENT_DIST_NAME} STATIC ${SOURCES})
+set_target_properties($ENV{TFSCLIENT_DIST_NAME} PROPERTIES VERSION $ENV{TFSCLIENT_DIST_VERSION})
+target_link_libraries($ENV{TFSCLIENT_DIST_NAME} ${PROTOBUF_LIBRARIES})
 
-install(TARGETS tensorflow_serving_client DESTINATION lib/static)
+install(TARGETS $ENV{TFSCLIENT_DIST_NAME} DESTINATION lib/static)
 install(DIRECTORY "${PROTO_GENERATED}/" DESTINATION include FILES_MATCHING PATTERN "*.h")

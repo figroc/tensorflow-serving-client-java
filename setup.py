@@ -1,37 +1,20 @@
-from os import walk
-from pathlib import Path
+from os import environ
 from setuptools import find_packages, setup
 
 
-def get_version():
-  with open("VERSION", "rt") as f:
-    return f.readline().strip()
-
-
-def init_package():
-  package="build/generated/source/proto/main/python"
-  for root, dirs, _ in walk(package):
-    for d in dirs:
-      Path(root, d, "__init__.py").touch()
-  return {
-    "packages": find_packages(package),
-    "package_dir": {"": package},
-    "package_data": {"": ["VERSION"]},
-    "include_package_data": True
-  }
-
-
 setup(
-  name="tensorflow_serving_client_grpc",
+  name=environ["TFSCLIENT_DIST_NAME"],
+  version=environ["TFSCLIENT_DIST_VERSION"],
+  packages=find_packages(environ["TFSCLIENT_DIST_SOURCE"]),
+  package_dir={"": environ["TFSCLIENT_DIST_SOURCE"]},
   python_requires=">=3.5",
   install_requires=["grpcio", "protobuf"],
   platforms=["any"],
-  author="Figroc Chen",
-  author_email="figroc@gmail.com",
-  license="Apache License 2.0",
-  url="https://github.com/figroc/tensorflow-serving-client",
-  description=("A prebuilt tensorflow serving client "
-               "from the tensorflow serving proto files"),
+  author=environ["TFSCLIENT_DIST_AUTHOR_NAME"],
+  author_email=environ["TFSCLIENT_DIST_AUTHOR_EMAIL"],
+  license=environ["TFSCLIENT_DIST_LICENSE"],
+  url=environ["TFSCLIENT_DIST_URL"],
+  description=environ["TFSCLIENT_DIST_DESCRIPTION"],
   long_description=("This library does not coexist with tensorflow, "
                     "tensorflow-serving and tensorflow-serving-api. "
                     "The official tensorflow-serving-api requires package "
@@ -46,7 +29,5 @@ setup(
                "Operating System :: OS Independent",
                "Programming Language :: Python :: 3",
                "Topic :: Scientific/Engineering :: Artificial Intelligence",
-               "Topic :: Software Development :: Libraries :: Python Modules"],
-  version=get_version(),
-  **init_package(),
+               "Topic :: Software Development :: Libraries :: Python Modules"]
 )

@@ -1,185 +1,70 @@
 buildscript {
   repositories {
-    maven {
-      url "https://plugins.gradle.org/m2/"
-    }
+    mavenCentral()
   }
   dependencies {
     classpath "com.google.protobuf:protobuf-gradle-plugin:0.8.10"
-    classpath "ru.vyarus:gradle-use-python-plugin:1.2.0"
-    classpath "gradle.plugin.com.github.blindpirate:gogradle:0.11.4"
   }
 }
 
-apply plugin: "java-library"
-apply plugin: "com.google.protobuf"
-apply plugin: "ru.vyarus.use-python"
-apply plugin: "com.github.blindpirate.gogradle"
-
 ext {
-  tfsVer = file("VERSION").text.trim()
-  jvmVer = "8"
-  grpcVer = "1.24.0"
-  protoVer = "3.10.0"
+  vers = [
+    tfs: file("VERSION").text.trim(),
+    jvm: "8",
+    grpc: "1.24.0",
+    proto: "3.10.0"]
+  dist = [
+    name: project.name,
+    version: vers.tfs,
+    title: "Tensorflow Serving Client",
+    license: "Apache-2.0",
+    url: "https://github.com/figroc/tensorflow-serving-client",
+    author: [
+      id: "figroc",
+      name: "Figroc Chen",
+      email: "figroc@gmail.com"],
+    description: "A prebuilt tensorflow serving client from the tensorflow serving proto files"]
 }
 
-group = "io.opil"
-version = "${tfsVer}"
+static def buildEnviron(options, prefix="TFSCLIENT_DIST") {
+  return options.collectEntries([:]) { k, v ->
+    def key = "${prefix}_${k.toUpperCase()}".toString()
+    return (v instanceof Map) ? buildEnviron(v, key) : [(key): v]
+  }
+}
 
-sourceCompatibility = "1.${jvmVer}"
-targetCompatibility = "1.${jvmVer}"
+version = "${vers.tfs}"
+
+apply plugin: "java-library"
+
+sourceCompatibility = "1.${vers.jvm}"
+targetCompatibility = "1.${vers.jvm}"
 
 repositories {
   mavenCentral()
 }
 
-sourceSets {
-  main {
-    proto {
-      srcDir "proto"
-    }
-  }
+apply from: "gradle/grpc.gradle"
+apply from: "gradle/cmake.gradle"
+apply from: "gradle/java.gradle"
+apply from: "gradle/wheel.gradle"
+apply from: "gradle/node.gradle"
+apply from: "gradle/golang.gradle"
+apply from: "gradle/mono.gradle"
+
+task buildAll {
+  dependsOn "cmake"
+  dependsOn "build"
+  dependsOn "wheel"
+  dependsOn "node"
+  dependsOn "golang"
+  dependsOn "mono"
 }
 
-static def getGrpcPlugin(name) {
-  def path = "which grpc_${name}_plugin".execute()
-  path.waitFor()
-  return path.in.text.trim()
-}
+apply from: "gradle/ossrh.gradle"
 
-protobuf {
-  protoc {
-    artifact = "com.google.protobuf:protoc:${protoVer}"
-  }
-  plugins {
-    grpc_cpp {
-      path = getGrpcPlugin("cpp")
-    }
-    grpc_java {
-      artifact = "io.grpc:protoc-gen-grpc-java:${grpcVer}"
-    }
-    grpc_python {
-      path = getGrpcPlugin("python")
-    }
-  }
-  generateProtoTasks {
-    all()*.builtins {
-      cpp { }
-      java { }
-      python { }
-    }
-    all()*.plugins {
-      grpc_cpp {
-        outputSubDir = "cpp"
-      }
-      grpc_java {
-        outputSubDir = "java"
-      }
-      grpc_python {
-        outputSubDir = "python"
-      }
-    }
-  }
-}
-
-sourceSets {
-  generated {
-    java {
-      srcDir "${protobuf.generatedFilesBaseDir}/main/java"
-    }
-  }
-}
-
-task cleanEmptyGrpc(type: Delete) {
-  dependsOn "generateProto"
-  delete fileTree("${protobuf.generatedFilesBaseDir}/main/cpp") {
-    include "**/*.grpc.pb.*"
-    exclude "**/*_service.grpc.pb.*"
-  }
-  delete fileTree("${protobuf.generatedFilesBaseDir}/main/python") {
-    include "**/*_pb2_grpc.py"
-    exclude "**/*_service_pb2_grpc.py"
-  }
-}
-
-dependencies {
-  implementation "com.google.protobuf:protobuf-java:${protoVer}"
-  implementation "io.grpc:grpc-protobuf:${grpcVer}"
-  implementation "io.grpc:grpc-stub:${grpcVer}"
-  golang {
-    build "github.com/golang/protobuf/protoc-gen-go"
-  }
-}
-
-jar {
-  baseName "tensorflow-serving-client"
-}
-
-javadoc {
-  source sourceSets.generated.java
-  options.addStringOption("Xdoclint:none", "-quiet")
-}
-
-task wheel(type: PythonTask) {
-  dependsOn "cleanEmptyGrpc"
-  command "setup.py sdist -d build/dist bdist_wheel -d build/dist"
-}
-
-task cmake() {
-  dependsOn "cleanEmptyGrpc"
-  doLast {
-    exec {
-      workingDir "build"
-      commandLine "cmake", "-DCMAKE_INSTALL_PREFIX=", ".."
-    }
-    exec {
-      workingDir "build"
-      commandLine "make", "DESTDIR=dist", "install"
-    }
-  }
-}
-
-golang {
-  packagePath = "github.com/figroc/tensorflow-serving-client"
-}
-
-task generateProtoGo {
-  dependsOn "resolveBuildDependencies"
-  ext {
-    generated = "${protobuf.generatedFilesBaseDir}/main/go"
-  }
-  doLast {
-    mkdir ext.generated
-    fileTree("proto"){ include "**/*.proto" }.visit { fd ->
-      if (fd.file.directory) return
-      exec {
-        commandLine "protoc", "-Iproto", "--go_out=plugins=grpc:${ext.generated}", fd.path
-      }
-    }
-    copy {
-      from "go.mod", "lib.go"
-      into ext.generated
-    }
-    fileTree(ext.generated){ include "*", "github.com/*" }.visit { fd ->
-      if (fd.file.file) return
-      if (fd.path == "github.com") return
-      copy {
-        from "go.mod"
-        into "${ext.generated}/${fd.path}"
-        filter { line ->
-          line.startsWith("module") ? "module ${fd.path}" : null
-        }
-      }
-    }
-  }
-}
-
-task golang() {
-  dependsOn "generateProtoGo"
-  doLast {
-    exec {
-      workingDir generateProtoGo.ext.generated
-      commandLine "go", "build"
-    }
-  }
+task publishAll {
+  dependsOn "publish"
+  dependsOn "twine"
+  dependsOn "npm"
 }

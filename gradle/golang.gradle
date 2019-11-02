@@ -1,0 +1,43 @@
+task generateProtoGo {
+  ext {
+    source = "${protoGenMainDir}/go"
+  }
+  inputs.file "go.mod"
+  inputs.file "lib.go"
+  inputs.dir "proto"
+  doLast {
+    mkdir source
+    fileTree("proto"){ include "**/*.proto" }.visit { fd ->
+      if (fd.file.directory) return
+      exec {
+        commandLine "protoc", "-Iproto", "--go_out=plugins=grpc:${source}", fd.path
+      }
+    }
+    copy {
+      from "lib.go", "go.mod"
+      into source
+    }
+    fileTree(source){ include "*", "github.com/*" }.visit { fd ->
+      if (fd.file.file) return
+      if (fd.path == "github.com") return
+      copy {
+        from "go.mod"
+        into "${source}/${fd.path}"
+        filter { line ->
+          line.startsWith("module") ? "module ${fd.path}" : null
+        }
+      }
+    }
+  }
+}
+
+task golang {
+  dependsOn "generateProtoGo"
+  inputs.dir generateProtoGo.source
+  doLast {
+    exec {
+      workingDir generateProtoGo.source
+      commandLine "go", "build"
+    }
+  }
+}

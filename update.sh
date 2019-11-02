@@ -2,7 +2,7 @@
 
 set -e
 
-ver="r$(cat VERSION | tr -d '\n')"
+ver="r$(cat VERSION | cut -d'.' -f1,2)"
 proj=tensorflow-serving-client
 repo=build/proto
 goto=proto

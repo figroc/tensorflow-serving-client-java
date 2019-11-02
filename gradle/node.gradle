@@ -1,0 +1,39 @@
+task node {
+  inputs.files "proto/**/*", "index.js", "package.json"
+  ext {
+    source = "${buildDir}/node"
+  }
+  doLast {
+    mkdir source
+    exec {
+      environment buildEnviron(dist)
+      standardInput file("package.json").newInputStream()
+      standardOutput file("${source}/package.json").newOutputStream()
+      commandLine "envsubst"
+    }
+    copy {
+      from projectDir
+      include "index.js", "proto/**/*", "LICENSE", "README.md"
+      into source
+    }
+    exec {
+      workingDir source
+      commandLine "npm", "install"
+    }
+    exec {
+      workingDir source
+      commandLine "npm", "build"
+    }
+    exec {
+      workingDir source
+      commandLine "npm", "pack"
+    }
+  }
+}
+
+task npm(type: Exec) {
+  dependsOn "node"
+  inputs.files "${node.source}/**/*"
+  workingDir node.source
+  commandLine "npm", "publish"
+}

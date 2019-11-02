@@ -3,23 +3,16 @@
   "files": [
     "proto"
   ],
-  "name": "tensorflow-serving-client",
-  "version": "0.0.0",
+  "name": "${TFSCLIENT_DIST_NAME}",
+  "version": "${TFSCLIENT_DIST_VERSION}",
   "dependencies": {
     "@grpc/proto-loader": "^0.5.0",
     "google-protobuf": "^3.10.0",
     "grpc": "^1.24.0"
   },
-  "description": "A prebuilt tensorflow serving client from the tensorflow serving proto files",
-  "keywords": [
-    "tensorflow",
-    "serving",
-    "apis",
-    "grpc",
-    "client"
-  ],
-  "homepage": "https://github.com/figroc/tensorflow-serving-client",
-  "license": "Apache License 2.0",
-  "author": "Figroc Chen <figroc@gmail.com>",
-  "repository": "github:figroc/tensorflow-serving-client"
+  "description": "${TFSCLIENT_DIST_DESCRIPTION}",
+  "homepage": "${TFSCLIENT_DIST_URL}",
+  "license": "${TFSCLIENT_DIST_LICENSE}",
+  "author": "${TFSCLIENT_DIST_AUTHOR_NAME} <${TFSCLIENT_DIST_AUTHOR_EMAIL}>",
+  "repository": "github:${TFSCLIENT_DIST_AUTHOR_ID}/${TFSCLIENT_DIST_NAME}"
 }

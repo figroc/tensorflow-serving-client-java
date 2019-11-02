@@ -1,0 +1,35 @@
+task wheel {
+  dependsOn "generateProto"
+  ext {
+    distEnv = dist.plus([
+      name: "${project.name.replace('-', '_')}_grpc",
+      source: "${protoGenMainRel}/python",
+      output: "${buildDir}/dist"])
+  }
+  inputs.file "setup.py"
+  inputs.dir distEnv.source
+  doLast {
+    fileTree(distEnv.source).visit { fd ->
+      if (fd.file.file) return
+      exec {
+        workingDir fd.file
+        commandLine "touch", "__init__.py"
+      }
+    }
+    exec {
+      environment buildEnviron(distEnv)
+      commandLine "python", "setup.py",
+                  "sdist", "-d", distEnv.output,
+                  "bdist_wheel", "-d", distEnv.output
+    }
+  }
+}
+
+task twine(type: Exec) {
+  dependsOn "wheel"
+  ext {
+    target = "${wheel.distEnv.output}/${wheel.distEnv.name}-*"
+  }
+  inputs.files target
+  commandLine "twine", "upload", "-s", "-i", "50E54CCB", target
+}

@@ -1,8 +1,7 @@
-build/
 .gradle/
-gradle*
-dist/
+build/
 node_modules/
 package-*.json
 package.json.*
-.gogradle/
+bin/
+obj/
