@@ -25,20 +25,19 @@ Grpc tools are needed for building variant packages.
 Install `protobuf-compiler-grpc` on Ubuntu and `grpc` on macOS.
 
 ### build jar file
+[![Publish Status](https://img.shields.io/maven-central/v/io.opil/tensorflow-serving-client)](https://search.maven.org/search?q=g:io.opil%20AND%20a:tensorflow-serving-client)
 ```
 gradle build
 ```
 * `tensorflow-serving-client` is located in `build/libs`
 
-The library has been published in maven central under the name `io.opil:tensorflow-serving-client`
-
 ### build wheel file
+[![Publish Status](https://img.shields.io/pypi/v/tensorflow-serving-client-grpc)](https://pypi.org/project/tensorflow-serving-client-grpc)
 ```
 gradle wheel
 ```
 * `tensorflow_serving_client_grpc` is located in `build/dist`
-
-The library has been published in pypi.org under the name `tensorflow-serving-client-grpc`.
+* **prerequisite:** `setuptools`
 
 ### build native library
 ```
@@ -48,12 +47,11 @@ gradle cmake
 * **prerequisite:** `libprotobuf-dev` on Ubuntu and `protobuf` on macOS
 
 ### build node tarball
+[![Publish Status](https://img.shields.io/npm/v/tensorflow-serving-client)](https://www.npmjs.com/package/tensorflow-serving-client)
 ```
 gradle node
 ```
 * `tensorflow-serving-client` tarball is located in `build/node`
-
-The library has been published in npmjs.com under the name `tensorflow-serving-client`
 
 ### build go module
 ```
@@ -63,9 +61,8 @@ gradle golang
 * **prerequisite:** `github.com/golang/protobuf/protoc-gen-go` for build
 
 ### build mono library
+[![Publish Status](https://img.shields.io/nuget/v/tensorflow-serving-client)](https://www.nuget.org/packages/tensorflow-serving-client/)
 ```
 gradle mono
 ```
-* `tensorflow-serving-client` is located in `build/msbuild`
-
-The library has been published in nuget.org under the name `tensorflow-serving-client`
+* `tensorflow-serving-client` is located in `build/msbuild` under `Release`
