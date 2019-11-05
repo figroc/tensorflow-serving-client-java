@@ -15,7 +15,6 @@ addons:
 env:
   - PATH="${PATH}:/usr/local/opt/gettext/bin:${HOME}/go/bin:${HOME}/.cargo/bin"
 script:
-  - echo ${CARGO_HOME}
   - gradle buildAll
 branches:
   only:

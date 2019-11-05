@@ -17,4 +17,4 @@ grpcio = "0.4.6"
 protobuf = "2.8.1"
 
 [lib]
-create-type = ["rlib"]
+crate-type = ["rlib"]
