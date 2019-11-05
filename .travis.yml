@@ -5,6 +5,7 @@ addons:
     packages:
       - cmake
       - gcc
+      - gettext
       - go
       - gradle
       - grpc
@@ -17,5 +18,7 @@ addons:
     casks:
       - dotnet-sdk
     update: true
+env:
+  - PATH="${PATH}:${HOME}/.go/bin:${HOME}/.cargo/bin"
 script:
   - gradle buildAll
