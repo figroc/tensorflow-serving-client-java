@@ -1,8 +1,21 @@
-dist: bionic
+os: osx
+osx_image: xcode10
 addons:
-  apt:
-    packages: protobuf-compiler-grpc
   homebrew:
-    packages: grpc
-language: java
-jdk: openjdk10
+    packages:
+      - cmake
+      - gcc
+      - go
+      - gradle
+      - grpc
+      - mono
+      - node
+      - nuget
+      - protobuf
+      - python
+      - rust
+    casks:
+      - dotnet-sdk
+    update: true
+script:
+  - gradle buildAll
