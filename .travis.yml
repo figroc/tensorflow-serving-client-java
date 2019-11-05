@@ -3,21 +3,15 @@ osx_image: xcode10
 addons:
   homebrew:
     packages:
-      - cmake
-      - gcc
-      - gettext
       - go
       - gradle
       - grpc
       - mono
-      - node
       - nuget
       - protobuf
-      - python
       - rust
     casks:
       - dotnet-sdk
-    update: true
 env:
   - PATH="${PATH}:${HOME}/.go/bin:${HOME}/.cargo/bin"
 script:
