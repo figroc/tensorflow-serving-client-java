@@ -13,10 +13,9 @@ addons:
     casks:
       - dotnet-sdk
 env:
-  - PATH="${PATH}:${HOME}/.go/bin:${HOME}/.cargo/bin"
+  - PATH="${PATH}:${HOME}/go/bin:${HOME}/.cargo/bin"
 script:
-  - echo ${PATH}
-  - go env
+  - env
   - ls -a ${HOME}
   - gradle buildAll
 branches:
