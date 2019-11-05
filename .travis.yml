@@ -15,6 +15,10 @@ addons:
 env:
   - PATH="${PATH}:${HOME}/.go/bin:${HOME}/.cargo/bin"
 script:
-  - ls ${HOME}/.go/bin
   - echo ${PATH}
+  - go env
+  - ls -a ${HOME}
   - gradle buildAll
+branches:
+  only:
+    - master
