@@ -15,7 +15,7 @@ env:
   - PATH="${PATH}:/usr/local/opt/gettext/bin:${HOME}/go/bin:${HOME}/.cargo/bin"
 install:
   # protobuf@3.10.1
-  - brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/22354d0af1/Formula/protobuf.rb
+  - brew install -f https://raw.githubusercontent.com/Homebrew/homebrew-core/22354d0af1/Formula/protobuf.rb
   # grpc@latest
   - brew install grpc
 script:
