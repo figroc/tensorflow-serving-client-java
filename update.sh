@@ -26,7 +26,8 @@ function importProto {
   if [[ ! -f ${goto}/${1} ]]; then
     echo "${1}"
     mkdir -p ${goto}/${1%/*}
-    \cp ${repo}/${1} ${goto}/${1}
+    sed 's@\(tensorflow/core/\)lib/core\(/error_codes.proto\)@\1protobuf\2@' \
+      ${repo}/${1} >${goto}/${1}
     local proto=( $(grep '^import ' ${goto}/${1} \
                   | grep -Eo '((\w|-)+(/|\.))+proto') )
     for p in ${proto[@]}; do

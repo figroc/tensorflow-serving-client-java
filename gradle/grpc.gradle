@@ -31,7 +31,9 @@ protobuf {
       cpp { }
       java { }
       python { }
-      csharp { }
+      csharp {
+        option "base_namespace="
+      }
     }
     all()*.plugins {
       grpc_cpp {
