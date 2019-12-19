@@ -59,6 +59,5 @@ task __java__ {
       commandLine "cat", "${buildDir}/build.gradle", "${buildDir}/java.gradle"
     }
     cfg.append("// @generated\nsourceSets{ main{ java{ srcDir \"${src}\" } } }\n")
-    delete { delete "gradle" }
   }
 }
