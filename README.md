@@ -4,80 +4,34 @@
 
 A prebuilt tensorflow serving client from the tensorflow serving proto files.
 
-Currently supported build:
-  * C++
-  * Java
-  * Python
-  * Node
-  * Go
-  * Mono
-  * Rust
+Currently supported build: C++, Java, Python, Node, Go, Mono, Rust
 
 Check tensorflow serving project for details: https://tensorflow.github.io/serving/
 
-### update proto files
+### update protos
 [![Release Status](https://img.shields.io/github/v/tag/tensorflow/tensorflow?label=tensorflow&sort=semver&include_prereleases)](https://github.com/tensorflow/tensorflow)
 [![Release Status](https://img.shields.io/github/v/tag/tensorflow/serving?label=serving&sort=semver&include_prereleases)](https://github.com/tensorflow/serving)
 [![Release Status](https://img.shields.io/github/v/tag/figroc/tensorflow-serving-client?label=client&sort=semver)](https://github.com/figroc/tensorflow-serving-client)
-```
-./update.sh
-```
-* the desired version can be specified in the `VERSION` file
 
-### PREREQUISITE
+Set desired version in the `VERSION` file and invoke `./update.sh`.
+
+### build artifacts
 
 Grpc tools are needed for building variant packages.
 
-Install `protobuf-compiler-grpc` on Ubuntu and `grpc` on macOS.
+ * Install `protobuf-compiler-grpc` and `libprotobuf-dev` on Ubuntu
+ * Install `grpc` and `protobuf` on macOS
 
-see `.travis.yml` for details
+See `.travis.yml` for details.
 
-### build native library
-[![Publish Status](https://img.shields.io/spack/v/tensorflow-serving-client)](https://github.com/spack/spack/tree/develop/var/spack/repos/builtin/packages/tensorflow-serving-client)
-```
-gradle cmake
-```
-* `libtensorflow-serving-client.a` is located in `build/dist/lib`
-* **prerequisite:** `libprotobuf-dev` on Ubuntu and `protobuf` on macOS
+**NOTE: `protobuf` has to be version `3.10`**
 
-### build java jar
-[![Publish Status](https://img.shields.io/maven-central/v/io.opil/tensorflow-serving-client)](https://search.maven.org/search?q=g:io.opil%20AND%20a:tensorflow-serving-client)
-```
-gradle build
-```
-* `tensorflow-serving-client` is located in `build/libs`
-
-### build python wheel
-[![Publish Status](https://img.shields.io/pypi/v/tensorflow-serving-client-grpc)](https://pypi.org/project/tensorflow-serving-client-grpc)
-```
-gradle wheel
-```
-* `tensorflow_serving_client_grpc` is located in `build/dist`
-
-### build node tarball
-[![Publish Status](https://img.shields.io/npm/v/tensorflow-serving-client)](https://www.npmjs.com/package/tensorflow-serving-client)
-```
-gradle node
-```
-* `tensorflow-serving-client` tarball is located in `build/node`
-
-### build go module
-[![Publish Status](https://img.shields.io/github/v/tag/figroc/tensorflow-serving-client?label=go&sort=semver)](https://github.com/figroc/tensorflow-serving-client)
-```
-gradle golang
-```
-* `tensorflow-serving-client` is located in `build/generated/source/proto/main/go`
-
-### build mono library
-[![Publish Status](https://img.shields.io/nuget/v/tensorflow-serving-client)](https://www.nuget.org/packages/tensorflow-serving-client)
-```
-gradle mono
-```
-* `tensorflow-serving-client` is located in `build/msbuild`
-
-### build rust crate
-[![Publish Status](https://img.shields.io/crates/v/tensorflow-serving-client)](https://crates.io/crates/tensorflow-serving-client)
-```
-gradle rust
-```
-* `libtensorflow_serving_client` is located in `build/cargo`
+Target | Command         | Artifacts
+-------|-----------------|-----------------------------------------------------
+native | `gradle cmake`  | [![Publish Status](https://img.shields.io/spack/v/tensorflow-serving-client)](https://github.com/spack/spack/tree/develop/var/spack/repos/builtin/packages/tensorflow-serving-client)
+java   | `gradle build`  | [![Publish Status](https://img.shields.io/maven-central/v/io.opil/tensorflow-serving-client)](https://search.maven.org/search?q=g:io.opil%20AND%20a:tensorflow-serving-client)
+python | `gradle wheel`  | [![Publish Status](https://img.shields.io/pypi/v/tensorflow-serving-client-grpc)](https://pypi.org/project/tensorflow-serving-client-grpc)
+node   | `gradle node`   | [![Publish Status](https://img.shields.io/npm/v/tensorflow-serving-client)](https://www.npmjs.com/package/tensorflow-serving-client)
+go     | `gradle golang` | [![Publish Status](https://img.shields.io/github/v/tag/figroc/tensorflow-serving-client?label=go&sort=semver)](https://github.com/figroc/tensorflow-serving-client)
+mono   | `gradle mono`   | [![Publish Status](https://img.shields.io/nuget/v/tensorflow-serving-client)](https://www.nuget.org/packages/tensorflow-serving-client)
+rust   | `gradle rust`   | [![Publish Status](https://img.shields.io/crates/v/tensorflow-serving-client)](https://crates.io/crates/tensorflow-serving-client)
