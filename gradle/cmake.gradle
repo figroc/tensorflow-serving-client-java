@@ -6,7 +6,7 @@ task cmake {
   inputs.file "CMakeLists.txt"
   inputs.file "Config.cmake"
   inputs.dir distEnv.source
-  outputs.dir "${buildDir}/dist"
+  outputs.dir "${buildDir}/cmake"
   doLast {
     exec {
       workingDir "${buildDir}"
@@ -16,7 +16,7 @@ task cmake {
     exec {
       workingDir "${buildDir}"
       environment buildEnviron(distEnv)
-      commandLine "make", "DESTDIR=dist", "install"
+      commandLine "make", "DESTDIR=cmake", "install"
     }
   }
 }

@@ -2,7 +2,7 @@ task mono {
   dependsOn "generateProto"
   ext {
     distEnv = dist.plus([source: "${protoGenMainRel}/csharp",
-                         output: "${buildDir}/msbuild"])
+                         output: "${buildDir}/mono"])
   }
   inputs.file "mono.csproj"
   inputs.dir distEnv.source

@@ -73,6 +73,7 @@ task finalizeProtoGo {
     rot = "github.com"
     sat = "${rot}/tensorflow/tensorflow/tensorflow/go"
     ome = "tensorflow"
+    output = "${buildDir}/go"
   }
   onlyIf {
     file("${source}/${rot}").exists()
@@ -125,6 +126,9 @@ task finalizeProtoGo {
       if (fd.file.file) return
       file("${source}/go.mod").append("\nreplace ${fd.path} => ./${fd.path}\n")
     }
+    exec {
+      commandLine "ln", "-nfs", source, output
+    }
   }
 }
 
@@ -135,7 +139,7 @@ task golang(type: Exec) {
   workingDir generateProtoGo.source
   commandLine "go", "build", "-v"
   args(dist.build == "release" ? ["-ldflags", "-s -w"] : [])
-  args "./..."
+  args("./...")
 }
 
 task __golang__ {
