@@ -9,8 +9,8 @@ Currently supported build: C++, Java, Python, Node, Go, Mono, Rust
 Check tensorflow serving project for details: https://tensorflow.github.io/serving/
 
 ## update protos
-[![Release Status](https://img.shields.io/github/v/tag/tensorflow/tensorflow?label=tensorflow&sort=semver&include_prereleases)](https://github.com/tensorflow/tensorflow)
-[![Release Status](https://img.shields.io/github/v/tag/tensorflow/serving?label=serving&sort=semver&include_prereleases)](https://github.com/tensorflow/serving)
+[![Release Status](https://img.shields.io/github/v/tag/tensorflow/tensorflow?label=tensorflow&sort=semver)](https://github.com/tensorflow/tensorflow)
+[![Release Status](https://img.shields.io/github/v/tag/tensorflow/serving?label=serving&sort=semver)](https://github.com/tensorflow/serving)
 [![Release Status](https://img.shields.io/github/v/tag/figroc/tensorflow-serving-client?label=client&sort=semver)](https://github.com/figroc/tensorflow-serving-client)
 
 Set desired version in the `VERSION` file and invoke `./update.sh`.
