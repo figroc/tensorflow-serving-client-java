@@ -22,6 +22,7 @@ ext {
                            dotnet: vers.grpc.tokenize(".").withIndex().collect{ v, i ->
                                      i == 0 ? ((v as int) + 1) : v
                                    }.join("."),
+                           go: "1.27.0",
                            node: "1.24.0",
                            rust: "0.4.6"],
                     proto: [_: vers.proto,
