@@ -1,10 +1,9 @@
 os: osx
 osx_image: xcode10
 
-before_install:
-  - brew update
 addons:
   homebrew:
+    update: true
     packages:
       - go
       - gradle
@@ -16,8 +15,6 @@ addons:
       - rust
     casks:
       - dotnet-sdk
-install:
-  - brew upgrade protobuf
 
 before_cache:
   - brew cleanup
