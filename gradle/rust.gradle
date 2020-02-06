@@ -39,7 +39,6 @@ task generateProtoRust {
         if (name == "lib.rs") return
         if (name.endsWith(".rs")) {
           rs.write "pub mod ${name[0..-4]};\n"
-          rs.write "pub use self::${name[0..-4]}::*;\n"
         }
       }
     }

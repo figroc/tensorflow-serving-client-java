@@ -12,7 +12,7 @@ documentation = "https://docs.rs/${TFSCLIENT_NAME}"
 categories = ["api-bindings", "science"]
 
 [dependencies]
-futures = "0.1.29"
+futures = "0.1.25"
 grpcio = "${TFSCLIENT_VERSION_GRPC_RUST}"
 protobuf = "${TFSCLIENT_VERSION_PROTO_RUST}"
 

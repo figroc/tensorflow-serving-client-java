@@ -2,7 +2,7 @@ task installProtocGenGo(type: Exec) {
   onlyIf {
     pathOfExecutable("protoc-gen-go") == ""
   }
-  commandLine "go", "get", "github.com/golang/protobuf/protoc-gen-go"
+  commandLine "go", "get", "github.com/golang/protobuf/protoc-gen-go@v${dist.version.proto.go}"
 }
 
 task generateProtoGo {

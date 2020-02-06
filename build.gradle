@@ -3,7 +3,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath "com.google.protobuf:protobuf-gradle-plugin:0.8.10"
+    classpath "com.google.protobuf:protobuf-gradle-plugin:0.8.11"
   }
 }
 
@@ -11,8 +11,8 @@ buildscript {
 ext {
   vers = [tfs: file("VERSION").text.trim(),
           jvm: "8",
-          grpc: "1.23.0",
-          proto: "3.10.0"]
+          grpc: "1.26.0",
+          proto: "3.11.3"]
   dist = [build: "release",
           name: [_: project.name,
                  title: project.name.tokenize("-").collect{it.capitalize()}.join(" "),
@@ -22,10 +22,11 @@ ext {
                            dotnet: vers.grpc.tokenize(".").withIndex().collect{ v, i ->
                                      i == 0 ? ((v as int) + 1) : v
                                    }.join("."),
+                           node: "1.24.0",
                            rust: "0.4.6"],
                     proto: [_: vers.proto,
-                            go: "1.3.0",
-                            rust: "2.8.1"]],
+                            go: "1.3.3",
+                            rust: "2.10.1"]],
           license: "Apache-2.0",
           author: [_: "Figroc Chen <figroc@gmail.com>",
                    id: "figroc",
