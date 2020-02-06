@@ -4,7 +4,7 @@
 
 A prebuilt tensorflow serving client from the tensorflow serving proto files.
 
-Currently supported build: C++, Java, Python, Node, Go, Mono, Rust
+Currently supported build: *C++, Java, Python, Node, Go, Mono, Rust*
 
 Check tensorflow serving project for details: https://tensorflow.github.io/serving/
 
@@ -24,7 +24,7 @@ Grpc tools are needed for building variant packages.
 
 See `.travis.yml` for details.
 
-*NOTE: `protobuf` has to be version `3.10`*
+*NOTE: grpc@1.26 and protobuf@3.11 are required*
 
 Target | Command         | Outputs     | Artifacts
 -------|-----------------|-------------|----------------------------------------
