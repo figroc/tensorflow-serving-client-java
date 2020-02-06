@@ -25,7 +25,7 @@ cache:
     - /usr/local/Homebrew
 
 env:
-  - PATH="${PATH}:/usr/local/opt/gettext/bin:${HOME}/go/bin:${HOME}/.cargo/bin"
+  - PATH="${PATH}:/usr/local/opt/gettext/bin:${HOME}/.go/bin:${HOME}/.cargo/bin"
   - GO111MODULE=on
 script:
   - gradle buildAll
