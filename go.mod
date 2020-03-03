@@ -1,4 +1,4 @@
-module github.com/figroc/tensorflow-serving-client
+module github.com/figroc/tensorflow-serving-client/v2
 
 go 1.12
 
