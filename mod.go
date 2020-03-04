@@ -1,4 +1,4 @@
-module github.com/figroc/tensorflow-serving-client
+module github.com/figroc/tensorflow-serving-client/v${TFSCLIENT_VERSION_MAJOR}
 
 go 1.12
 

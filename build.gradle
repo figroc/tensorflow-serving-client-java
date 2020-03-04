@@ -18,6 +18,7 @@ ext {
                  title: project.name.tokenize("-").collect{it.capitalize()}.join(" "),
                  snake: project.name.replaceAll("-", "_")],
           version: [_: vers.tfs,
+                    major: vers.tfs.tokenize('.').first(),
                     grpc: [_: vers.grpc,
                            dotnet: vers.grpc.tokenize(".").withIndex().collect{ v, i ->
                                      i == 0 ? ((v as int) + 1) : v

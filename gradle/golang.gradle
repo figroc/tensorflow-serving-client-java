@@ -157,7 +157,7 @@ task __golang__ {
       into src
       filter { line ->
          line.replaceFirst('(\\w+\\s+")(tensorflow(_serving)?(/\\w+)*")',
-                           '$1' + git + '/' + src + '/$2')
+                           '$1' + "${git}/v${dist.version.major}/${src}/" + '$2')
       }
     }
     copy {
