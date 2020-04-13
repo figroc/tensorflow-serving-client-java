@@ -9,20 +9,19 @@ goto=proto
 apis=tensorflow_serving/apis
 
 rm -rf ${repo}
-function fetchRepo {
-  set -e
+function fetchRepo {( set -e
   mkdir -p ${repo}/tmp
   git -C ${repo}/tmp \
       clone --depth 1 -b ${ver} \
       https://github.com/tensorflow/${1}.git
   mv ${repo}/tmp/${1}/${2} ${repo}/
   rm -rf ${repo}/tmp
-}
+)}
 fetchRepo tensorflow tensorflow         && echo
 fetchRepo serving    tensorflow_serving && echo
 
 rm -rf ${goto}
-function importProto {
+function importProto {( set -e
   if [[ ! -f ${goto}/${1} ]]; then
     echo "${1}"
     mkdir -p ${goto}/${1%/*}
@@ -36,7 +35,7 @@ function importProto {
       fi
     done
   fi
-}
+)}
 for i in ${repo}/${apis}/*_service.proto; do
   importProto ${i#${repo}/}
 done

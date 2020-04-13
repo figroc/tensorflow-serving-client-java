@@ -34,17 +34,6 @@ task generateProtoGo {
       standardOutput file("${source}/go.mod").newOutputStream()
       commandLine "envsubst"
     }
-    fileTree(source){ include "*", "github.com/*" }.visit { fd ->
-      if (fd.file.file) return
-      if (fd.path == "github.com") return
-      copy {
-        from "${source}/go.mod"
-        into "${source}/${fd.path}"
-        filter { line ->
-          line.startsWith("module") ? "module ${fd.path}" : line
-        }
-      }
-    }
   }
 }
 
@@ -124,6 +113,14 @@ task finalizeProtoGo {
     }
     fileTree(source){ include "*" }.visit { fd ->
       if (fd.file.file) return
+      copy {
+        from "${source}/go.mod"
+        into "${source}/${fd.path}"
+        filter { line ->
+          line.startsWith("module") ? "module ${fd.path}" : line
+        }
+      }
+      println("generate mod: ${fd.path}/go.mod")
       file("${source}/go.mod").append("\nreplace ${fd.path} => ./${fd.path}\n")
     }
     exec {
