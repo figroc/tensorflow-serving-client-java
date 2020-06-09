@@ -1,15 +1,9 @@
 task installProtocGenRust(type: Exec) {
-  onlyIf {
-    pathOfExecutable("protoc-gen-rust") == ""
-  }
-  commandLine "cargo", "install", "protobuf-codegen"
+  commandLine "cargo", "install", "--vers", dist.version.proto.rust, "protobuf-codegen"
 }
 
 task installGrpcRustPlugin(type: Exec) {
-  onlyIf {
-    pathOfExecutable("grpc_rust_plugin") == ""
-  }
-  commandLine "cargo", "install", "grpcio-compiler"
+  commandLine "cargo", "install", "--vers", dist.version.proto.grpc, "grpcio-compiler"
 }
 
 task generateProtoRust {
