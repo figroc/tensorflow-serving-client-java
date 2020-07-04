@@ -16,9 +16,11 @@ addons:
       - dotnet-sdk
 
 before_install:
-  - brew extract protobuf figroc/homebrew-versions --version=3.12.2
-  - brew install -v --ignore-dependencies protobuf@3.12.2
-  - brew link --overwrite protobuf@3.12.2
+  - |
+    cd $(brew --repository)/Library/Taps/homebrew/homebrew-core
+    git checkout f13bf9adadfe0525c2f4aaeb18b21c636bd7ce1a
+    brew install protobuf
+    git checkout master
 
 before_cache:
   - brew cleanup
