@@ -1,0 +1,22 @@
+[package]
+edition = "2018"
+name = "tensorflow-serving-client"
+version = "2.2.0"
+authors = ["Figroc Chen <figroc@gmail.com>"]
+license = "Apache-2.0"
+description = "A prebuilt tensorflow serving client from the tensorflow serving proto files"
+readme = "README.md"
+homepage = "https://github.com/figroc/tensorflow-serving-client"
+repository = "https://github.com/figroc/tensorflow-serving-client"
+documentation = "https://docs.rs/tensorflow-serving-client"
+categories = ["api-bindings", "science"]
+
+[dependencies]
+futures = "0.3.5"
+grpcio = "0.6.0"
+protobuf = "2.14.0"
+
+[lib]
+crate-type = ["rlib"]
+
+path = "rust/lib.rs"

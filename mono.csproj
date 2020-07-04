@@ -3,30 +3,30 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <Configuration>$(TFSCLIENT_BUILD)</Configuration>
+    <Configuration>release</Configuration>
     <EnableDefaultItems>false</EnableDefaultItems>
     <GenerateDocumentation>true</GenerateDocumentation>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(TFSCLIENT_SOURCE)/**/*.cs" />
+    <Compile Include="csharp/**/*.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="$(TFSCLIENT_VERSION_PROTO)" />
-    <PackageReference Include="Grpc.Core" Version="$(TFSCLIENT_VERSION_GRPC_DOTNET)" />
+    <PackageReference Include="Google.Protobuf" Version="3.12.0" />
+    <PackageReference Include="Grpc.Core" Version="2.30.0" />
   </ItemGroup>
   <PropertyGroup>
-    <Version>$(TFSCLIENT_VERSION)</Version>
-    <AssemblyName>$(TFSCLIENT_NAME)</AssemblyName>
-    <AssemblyTitle>$(TFSCLIENT_NAME_TITLE)</AssemblyTitle>
-    <Company>$(TFSCLIENT_AUTHOR_NAME)</Company>
-    <Description>$(TFSCLIENT_DESCRIPTION)</Description>
-    <BaseOutputPath>$(TFSCLIENT_OUTPUT)</BaseOutputPath>
+    <Version>2.2.0</Version>
+    <AssemblyName>tensorflow-serving-client</AssemblyName>
+    <AssemblyTitle>Tensorflow Serving Client</AssemblyTitle>
+    <Company>Figroc Chen</Company>
+    <Description>A prebuilt tensorflow serving client from the tensorflow serving proto files</Description>
+    <BaseOutputPath>bin</BaseOutputPath>
   </PropertyGroup>
   <PropertyGroup>
-    <Title>$(TFSCLIENT_NAME_TITLE)</Title>
-    <Authors>$(TFSCLIENT_AUTHOR_NAME)</Authors>
-    <Owners>$(TFSCLIENT_AUTHOR_ID)</Owners>
-    <PackageLicenseExpression>$(TFSCLIENT_LICENSE)</PackageLicenseExpression>
-    <RepositoryUrl>$(TFSCLIENT_URL)</RepositoryUrl>
+    <Title>Tensorflow Serving Client</Title>
+    <Authors>Figroc Chen</Authors>
+    <Owners>figroc</Owners>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/figroc/tensorflow-serving-client</RepositoryUrl>
   </PropertyGroup>
 </Project>
