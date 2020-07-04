@@ -17,9 +17,9 @@ addons:
 
 before_install:
   - |
-    cd $(brew --repository)/Library/Taps/homebrew/homebrew-core
+    cd $(brew --repo homebrew/core)
     git checkout f13bf9adadfe0525c2f4aaeb18b21c636bd7ce1a
-    brew install protobuf
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install -f protobuf
     git checkout master
 
 before_cache:
