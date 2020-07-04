@@ -3,7 +3,7 @@ task installProtocGenRust(type: Exec) {
 }
 
 task installGrpcRustPlugin(type: Exec) {
-  commandLine "cargo", "install", "--vers", dist.version.proto.grpc, "grpcio-compiler"
+  commandLine "cargo", "install", "--vers", dist.version.grpc.rust, "grpcio-compiler"
 }
 
 task generateProtoRust {

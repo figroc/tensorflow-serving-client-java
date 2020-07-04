@@ -4,6 +4,8 @@ osx_image: xcode10
 addons:
   homebrew:
     update: true
+    taps:
+      - figroc/homebrew-versions
     packages:
       - go
       - gradle
@@ -11,7 +13,7 @@ addons:
       - mono
       - nuget
       - pkg-config
-      - protobuf
+      - protobuf@3.12.2
       - rust
     casks:
       - dotnet-sdk
