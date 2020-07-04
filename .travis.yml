@@ -4,8 +4,6 @@ osx_image: xcode10
 addons:
   homebrew:
     update: true
-    taps:
-      - figroc/homebrew-versions
     packages:
       - go
       - gradle
@@ -13,10 +11,14 @@ addons:
       - mono
       - nuget
       - pkg-config
-      - protobuf@3.12.2
       - rust
     casks:
       - dotnet-sdk
+
+before_install:
+  - brew extract protobuf figroc/homebrew-versions --version=3.12.2
+  - brew install protobuf@3.12.2
+  - brew link --overwrite protobuf@3.12.2
 
 before_cache:
   - brew cleanup
