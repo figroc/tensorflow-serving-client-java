@@ -15,11 +15,11 @@ addons:
     casks:
       - dotnet-sdk
 
-before_install:
-  - |
-    git -C $(brew --repo homebrew/core) checkout f13bf9adadfe0525c2f4aaeb18b21c636bd7ce1a
-    brew unlink protobuf && HOMEBREW_NO_AUTO_UPDATE=1 brew install protobuf
-    git -C $(brew --repo homebrew/core) checkout master
+install:
+  - | # protobuf@3.12.2
+      git -C $(brew --repo homebrew/core) checkout f13bf9adadfe0525c2f4aaeb18b21c636bd7ce1a
+      brew unlink protobuf && HOMEBREW_NO_AUTO_UPDATE=1 brew install protobuf
+      git -C $(brew --repo homebrew/core) checkout master
 
 before_cache:
   - brew cleanup
