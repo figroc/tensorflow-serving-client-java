@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+cd $(dirname ${BASH_SOURCE[0]})
 
 ver="r$(cat VERSION | cut -d'.' -f1,2)"
 proj=tensorflow-serving-client

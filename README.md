@@ -4,7 +4,7 @@
 
 A prebuilt tensorflow serving client from the tensorflow serving proto files.
 
-Currently supported build: *C++, Java, Python, Node, Go, Mono, Rust*
+Currently supported build: *C++, Java, Python, Node, Go, Mono, Rust*.
 
 Check tensorflow serving project for details: https://tensorflow.github.io/serving/
 
@@ -30,7 +30,7 @@ See `.travis.yml` for details.
 Target | Command         | Outputs     | Artifacts
 -------|-----------------|-------------|----------------------------------------
 native | `gradle cmake`  | build/cmake | [![Publish Status](https://img.shields.io/spack/v/tensorflow-serving-client)](https://github.com/spack/spack/tree/develop/var/spack/repos/builtin/packages/tensorflow-serving-client)
-java   | `gradle build`  | build/libs  | [![Publish Status](https://img.shields.io/maven-central/v/io.opil/tensorflow-serving-client)](https://search.maven.org/search?q=g:io.opil%20AND%20a:tensorflow-serving-client)
+java   | `gradle java`   | build/libs  | [![Publish Status](https://img.shields.io/maven-central/v/io.opil/tensorflow-serving-client)](https://search.maven.org/search?q=g:io.opil%20AND%20a:tensorflow-serving-client)
 python | `gradle wheel`  | build/dist  | [![Publish Status](https://img.shields.io/pypi/v/tensorflow-serving-client-grpc)](https://pypi.org/project/tensorflow-serving-client-grpc)
 node   | `gradle node`   | build/node  | [![Publish Status](https://img.shields.io/npm/v/tensorflow-serving-client)](https://www.npmjs.com/package/tensorflow-serving-client)
 go     | `gradle golang` | build/go    | [![Publish Status](https://img.shields.io/github/v/tag/figroc/tensorflow-serving-client?label=go&sort=semver)](https://github.com/figroc/tensorflow-serving-client)
