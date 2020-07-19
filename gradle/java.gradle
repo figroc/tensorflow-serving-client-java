@@ -26,6 +26,10 @@ javadoc {
   options.addStringOption("Xdoclint:none", "-quiet")
 }
 
+task java {
+  dependsOn "build"
+}
+
 task __java__ {
   dependsOn "build"
   ext {

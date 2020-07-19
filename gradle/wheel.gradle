@@ -18,7 +18,7 @@ task wheel {
     }
     exec {
       environment buildEnviron(distEnv)
-      commandLine "python", "setup.py",
+      commandLine "python3", "setup.py",
                   "sdist", "-d", distEnv.output,
                   "bdist_wheel", "-d", distEnv.output
     }

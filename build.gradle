@@ -62,12 +62,6 @@ static def pathOfExecutable(name) {
   return path.in.text.trim()
 }
 
-static def resultOfShellCode(cmd) {
-  def shell = "bash -c '${cmd}'".execute()
-  shell.waitFor()
-  return shell.in.text.trim()
-}
-
 apply from: "gradle/grpc.gradle"
 apply from: "gradle/cmake.gradle"
 apply from: "gradle/java.gradle"
@@ -79,7 +73,7 @@ apply from: "gradle/rust.gradle"
 
 task buildAll {
   dependsOn "cmake"
-  dependsOn "build"
+  dependsOn "java"
   dependsOn "wheel"
   dependsOn "node"
   dependsOn "golang"
@@ -105,5 +99,5 @@ task __sources__(type: Delete) {
   dependsOn "__golang__"
   dependsOn "__csharp__"
   dependsOn "__rust__"
-  delete ".travis.yml", "update.sh", "gradle"
+  delete ".travis.yml", "build.sh", "update.sh", "Dockerfile", "gradle"
 }

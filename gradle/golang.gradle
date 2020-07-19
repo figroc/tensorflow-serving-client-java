@@ -68,10 +68,20 @@ task finalizeProtoGo {
     file("${source}/${rot}").exists()
   }
   doLast {
+    def gnu = new ByteArrayOutputStream()
+    exec {
+      ignoreExitValue = true
+      standardOutput gnu
+      errorOutput gnu
+      commandLine "sed", "--version"
+    }
+    gnu = gnu.toString().contains("GNU")
+    def lwb = gnu ? "\\b" : "[[:<:]]"
+    def rwb = gnu ? "\\b" : "[[:>:]]"
     fileTree(source){ include "**/*.go" }.visit { fd ->
       if (fd.file.directory) return
       exec {
-        commandLine "sed", "-i.sed", "s@[[:<:]]${sat}[[:>:]]@${ome}@g", "${source}/${fd.path}"
+        commandLine "sed", "-i.sed", "s@${lwb}${sat}${rwb}@${ome}@g", "${source}/${fd.path}"
       }
     }
     fileTree(source){ include "${sat}/**/*.go" }.visit { fd ->
@@ -98,7 +108,7 @@ task finalizeProtoGo {
           commandLine "sed", "-i.sed", "\\@${pattern}@d", "${source}/${fd.path}"
         }
         exec {
-          commandLine "sed", "-i.sed", "s@[[:<:]]${name}\\.@@g", "${source}/${fd.path}"
+          commandLine "sed", "-i.sed", "s@${lwb}${name}\\.@@g", "${source}/${fd.path}"
         }
       }
     }
@@ -124,7 +134,7 @@ task finalizeProtoGo {
       file("${source}/go.mod").append("\nreplace ${fd.path} => ./${fd.path}\n")
     }
     exec {
-      commandLine "ln", "-nfs", source, output
+      commandLine "ln", "-nfs", buildDir.relativePath(new File(source)), output
     }
   }
 }
