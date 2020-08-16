@@ -18,8 +18,8 @@ function fetchRepo {( set -e
   mv ${repo}/tmp/${1}/${2} ${repo}/
   rm -rf ${repo}/tmp
 )}
-fetchRepo tensorflow tensorflow         && echo
-fetchRepo serving    tensorflow_serving && echo
+fetchRepo tensorflow tensorflow
+fetchRepo serving    tensorflow_serving
 
 rm -rf ${goto}
 function importProto {( set -e
