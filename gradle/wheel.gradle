@@ -25,13 +25,21 @@ task wheel {
   }
 }
 
-task twine(type: Exec) {
+task signWheel(type: Sign) {
   dependsOn "wheel"
+  ext {
+    target = "${wheel.distEnv.output}/${wheel.distEnv.name_}-${vers.tfs}"
+  }
+  sign file("${target}-py3-none-any.whl"), file("${target}.tar.gz")
+}
+
+task twine(type: Exec) {
+  dependsOn "signWheel"
   ext {
     target = "${wheel.distEnv.output}/${wheel.distEnv.name_}-*"
   }
   inputs.files target
-  commandLine "twine", "upload", "-s", "-i", "50E54CCB", target
+  commandLine "twine", "upload", target
 }
 
 task __python__ {

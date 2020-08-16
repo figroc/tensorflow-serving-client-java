@@ -1,5 +1,4 @@
 apply plugin: "maven-publish"
-apply plugin: "signing"
 
 task sourcesJar(type: Jar) {
   classifier "sources"

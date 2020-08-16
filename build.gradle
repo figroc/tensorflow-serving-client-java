@@ -62,6 +62,8 @@ static def pathOfExecutable(name) {
   return path.in.text.trim()
 }
 
+apply plugin: "signing"
+
 apply from: "gradle/grpc.gradle"
 apply from: "gradle/cmake.gradle"
 apply from: "gradle/java.gradle"
