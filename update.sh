@@ -9,6 +9,10 @@ repo=build/proto
 goto=proto
 apis=tensorflow_serving/apis
 
+norm=('s@(tensorflow/core/)lib/core(/error_codes.proto)@\1protobuf\2@'
+      's@(option go_package = ".*)/[a-z_]*_go_proto(".*)@\1\2@')
+norm=$(IFS=';'; echo "${norm[*]}")
+
 rm -rf ${repo}
 function fetchRepo {( set -e
   mkdir -p ${repo}/tmp
@@ -26,8 +30,7 @@ function importProto {( set -e
   if [[ ! -f ${goto}/${1} ]]; then
     echo "${1}"
     mkdir -p ${goto}/${1%/*}
-    sed 's@\(tensorflow/core/\)lib/core\(/error_codes.proto\)@\1protobuf\2@' \
-      ${repo}/${1} >${goto}/${1}
+    sed -E "${norm}" ${repo}/${1} >${goto}/${1}
     local proto=( $(grep '^import ' ${goto}/${1} \
                   | grep -Eo '((\w|-)+(/|\.))+proto') )
     for p in ${proto[@]}; do
