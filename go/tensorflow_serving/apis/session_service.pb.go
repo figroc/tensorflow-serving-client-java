@@ -7,7 +7,7 @@ import (
 	context "context"
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	core "tensorflow/core"
+	core "github.com/figroc/tensorflow-serving-client/v2/go/tensorflow/core"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

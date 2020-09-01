@@ -8,7 +8,7 @@ import (
 	proto "github.com/golang/protobuf/proto"
 	any "github.com/golang/protobuf/ptypes/any"
 	math "math"
-	storage_path "tensorflow_serving/sources/storage_path"
+	storage_path "github.com/figroc/tensorflow-serving-client/v2/go/tensorflow_serving/sources/storage_path"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

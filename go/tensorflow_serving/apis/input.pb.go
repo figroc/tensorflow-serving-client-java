@@ -6,7 +6,7 @@ package tensorflow_serving
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	example "tensorflow/core/example"
+	example "github.com/figroc/tensorflow-serving-client/v2/go/tensorflow/core/example"
 	math "math"
 )
 
