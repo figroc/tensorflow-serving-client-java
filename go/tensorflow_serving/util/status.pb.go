@@ -6,7 +6,7 @@ package tensorflow_serving
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	core_protos_go_proto "github.com/figroc/tensorflow-serving-client/v2/go/tensorflow/core/core_protos_go_proto"
+	core "github.com/figroc/tensorflow-serving-client/v2/go/tensorflow/core"
 	math "math"
 )
 
@@ -25,7 +25,7 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 // third_party/tensorflow/core/lib/core/status.h.
 type StatusProto struct {
 	// Error code.
-	ErrorCode core_protos_go_proto.Code `protobuf:"varint,1,opt,name=error_code,proto3,enum=tensorflow.error.Code" json:"error_code,omitempty"`
+	ErrorCode core.Code `protobuf:"varint,1,opt,name=error_code,proto3,enum=tensorflow.error.Code" json:"error_code,omitempty"`
 	// Error message. Will only be set if an error was encountered.
 	ErrorMessage         string   `protobuf:"bytes,2,opt,name=error_message,proto3" json:"error_message,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -58,11 +58,11 @@ func (m *StatusProto) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_StatusProto proto.InternalMessageInfo
 
-func (m *StatusProto) GetErrorCode() core_protos_go_proto.Code {
+func (m *StatusProto) GetErrorCode() core.Code {
 	if m != nil {
 		return m.ErrorCode
 	}
-	return core_protos_go_proto.Code_OK
+	return core.Code_OK
 }
 
 func (m *StatusProto) GetErrorMessage() string {

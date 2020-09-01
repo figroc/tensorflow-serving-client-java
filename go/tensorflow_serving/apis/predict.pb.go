@@ -6,7 +6,7 @@ package tensorflow_serving
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	tensor_go_proto "github.com/figroc/tensorflow-serving-client/v2/go/tensorflow/core/framework/tensor_go_proto"
+	framework "github.com/figroc/tensorflow-serving-client/v2/go/tensorflow/core/framework"
 	math "math"
 )
 
@@ -32,7 +32,7 @@ type PredictRequest struct {
 	// Names of input tensor are alias names. The mapping from aliases to real
 	// input tensor names is stored in the SavedModel export as a prediction
 	// SignatureDef under the 'inputs' field.
-	Inputs map[string]*tensor_go_proto.TensorProto `protobuf:"bytes,2,rep,name=inputs,proto3" json:"inputs,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Inputs map[string]*framework.TensorProto `protobuf:"bytes,2,rep,name=inputs,proto3" json:"inputs,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Output filter.
 	// Names specified are alias names. The mapping from aliases to real output
 	// tensor names is stored in the SavedModel export as a prediction
@@ -78,7 +78,7 @@ func (m *PredictRequest) GetModelSpec() *ModelSpec {
 	return nil
 }
 
-func (m *PredictRequest) GetInputs() map[string]*tensor_go_proto.TensorProto {
+func (m *PredictRequest) GetInputs() map[string]*framework.TensorProto {
 	if m != nil {
 		return m.Inputs
 	}
@@ -97,10 +97,10 @@ type PredictResponse struct {
 	// Effective Model Specification used to process PredictRequest.
 	ModelSpec *ModelSpec `protobuf:"bytes,2,opt,name=model_spec,json=modelSpec,proto3" json:"model_spec,omitempty"`
 	// Output tensors.
-	Outputs              map[string]*tensor_go_proto.TensorProto `protobuf:"bytes,1,rep,name=outputs,proto3" json:"outputs,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	XXX_NoUnkeyedLiteral struct{}                                `json:"-"`
-	XXX_unrecognized     []byte                                  `json:"-"`
-	XXX_sizecache        int32                                   `json:"-"`
+	Outputs              map[string]*framework.TensorProto `protobuf:"bytes,1,rep,name=outputs,proto3" json:"outputs,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}                          `json:"-"`
+	XXX_unrecognized     []byte                            `json:"-"`
+	XXX_sizecache        int32                             `json:"-"`
 }
 
 func (m *PredictResponse) Reset()         { *m = PredictResponse{} }
@@ -135,7 +135,7 @@ func (m *PredictResponse) GetModelSpec() *ModelSpec {
 	return nil
 }
 
-func (m *PredictResponse) GetOutputs() map[string]*tensor_go_proto.TensorProto {
+func (m *PredictResponse) GetOutputs() map[string]*framework.TensorProto {
 	if m != nil {
 		return m.Outputs
 	}
@@ -144,9 +144,9 @@ func (m *PredictResponse) GetOutputs() map[string]*tensor_go_proto.TensorProto {
 
 func init() {
 	proto.RegisterType((*PredictRequest)(nil), "tensorflow.serving.PredictRequest")
-	proto.RegisterMapType((map[string]*tensor_go_proto.TensorProto)(nil), "tensorflow.serving.PredictRequest.InputsEntry")
+	proto.RegisterMapType((map[string]*framework.TensorProto)(nil), "tensorflow.serving.PredictRequest.InputsEntry")
 	proto.RegisterType((*PredictResponse)(nil), "tensorflow.serving.PredictResponse")
-	proto.RegisterMapType((map[string]*tensor_go_proto.TensorProto)(nil), "tensorflow.serving.PredictResponse.OutputsEntry")
+	proto.RegisterMapType((map[string]*framework.TensorProto)(nil), "tensorflow.serving.PredictResponse.OutputsEntry")
 }
 
 func init() {

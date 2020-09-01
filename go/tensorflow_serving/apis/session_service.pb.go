@@ -7,7 +7,7 @@ import (
 	context "context"
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	core_protos_go_proto "github.com/figroc/tensorflow-serving-client/v2/go/tensorflow/core/core_protos_go_proto"
+	core "github.com/figroc/tensorflow-serving-client/v2/go/tensorflow/core"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -30,7 +30,7 @@ type SessionRunRequest struct {
 	// (numerical) version.
 	ModelSpec *ModelSpec `protobuf:"bytes,1,opt,name=model_spec,json=modelSpec,proto3" json:"model_spec,omitempty"`
 	// Tensors to be fed in the step. Each feed is a named tensor.
-	Feed []*core_protos_go_proto.NamedTensorProto `protobuf:"bytes,2,rep,name=feed,proto3" json:"feed,omitempty"`
+	Feed []*core.NamedTensorProto `protobuf:"bytes,2,rep,name=feed,proto3" json:"feed,omitempty"`
 	// Fetches. A list of tensor names. The caller expects a tensor to
 	// be returned for each fetch[i] (see RunResponse.tensor). The
 	// order of specified fetches does not change the execution order.
@@ -39,10 +39,10 @@ type SessionRunRequest struct {
 	// to but their outputs will not be fetched.
 	Target []string `protobuf:"bytes,4,rep,name=target,proto3" json:"target,omitempty"`
 	// Options for the run call. **Currently ignored.**
-	Options              *core_protos_go_proto.RunOptions `protobuf:"bytes,5,opt,name=options,proto3" json:"options,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                         `json:"-"`
-	XXX_unrecognized     []byte                           `json:"-"`
-	XXX_sizecache        int32                            `json:"-"`
+	Options              *core.RunOptions `protobuf:"bytes,5,opt,name=options,proto3" json:"options,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
 }
 
 func (m *SessionRunRequest) Reset()         { *m = SessionRunRequest{} }
@@ -77,7 +77,7 @@ func (m *SessionRunRequest) GetModelSpec() *ModelSpec {
 	return nil
 }
 
-func (m *SessionRunRequest) GetFeed() []*core_protos_go_proto.NamedTensorProto {
+func (m *SessionRunRequest) GetFeed() []*core.NamedTensorProto {
 	if m != nil {
 		return m.Feed
 	}
@@ -98,7 +98,7 @@ func (m *SessionRunRequest) GetTarget() []string {
 	return nil
 }
 
-func (m *SessionRunRequest) GetOptions() *core_protos_go_proto.RunOptions {
+func (m *SessionRunRequest) GetOptions() *core.RunOptions {
 	if m != nil {
 		return m.Options
 	}
@@ -110,12 +110,12 @@ type SessionRunResponse struct {
 	ModelSpec *ModelSpec `protobuf:"bytes,3,opt,name=model_spec,json=modelSpec,proto3" json:"model_spec,omitempty"`
 	// NOTE: The order of the returned tensors may or may not match
 	// the fetch order specified in RunRequest.
-	Tensor []*core_protos_go_proto.NamedTensorProto `protobuf:"bytes,1,rep,name=tensor,proto3" json:"tensor,omitempty"`
+	Tensor []*core.NamedTensorProto `protobuf:"bytes,1,rep,name=tensor,proto3" json:"tensor,omitempty"`
 	// Returned metadata if requested in the options.
-	Metadata             *core_protos_go_proto.RunMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                          `json:"-"`
-	XXX_unrecognized     []byte                            `json:"-"`
-	XXX_sizecache        int32                             `json:"-"`
+	Metadata             *core.RunMetadata `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
 }
 
 func (m *SessionRunResponse) Reset()         { *m = SessionRunResponse{} }
@@ -150,14 +150,14 @@ func (m *SessionRunResponse) GetModelSpec() *ModelSpec {
 	return nil
 }
 
-func (m *SessionRunResponse) GetTensor() []*core_protos_go_proto.NamedTensorProto {
+func (m *SessionRunResponse) GetTensor() []*core.NamedTensorProto {
 	if m != nil {
 		return m.Tensor
 	}
 	return nil
 }
 
-func (m *SessionRunResponse) GetMetadata() *core_protos_go_proto.RunMetadata {
+func (m *SessionRunResponse) GetMetadata() *core.RunMetadata {
 	if m != nil {
 		return m.Metadata
 	}
