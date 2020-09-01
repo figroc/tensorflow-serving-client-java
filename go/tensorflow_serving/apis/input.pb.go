@@ -6,7 +6,7 @@ package tensorflow_serving
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	example_protos_go_proto "github.com/figroc/tensorflow-serving-client/v2/go/tensorflow/core/example/example_protos_go_proto"
+	example "tensorflow/core/example"
 	math "math"
 )
 
@@ -25,10 +25,10 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 // See examples at:
 //     https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/example/example.proto
 type ExampleList struct {
-	Examples             []*example_protos_go_proto.Example `protobuf:"bytes,1,rep,name=examples,proto3" json:"examples,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                           `json:"-"`
-	XXX_unrecognized     []byte                             `json:"-"`
-	XXX_sizecache        int32                              `json:"-"`
+	Examples             []*example.Example `protobuf:"bytes,1,rep,name=examples,proto3" json:"examples,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
 func (m *ExampleList) Reset()         { *m = ExampleList{} }
@@ -56,7 +56,7 @@ func (m *ExampleList) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ExampleList proto.InternalMessageInfo
 
-func (m *ExampleList) GetExamples() []*example_protos_go_proto.Example {
+func (m *ExampleList) GetExamples() []*example.Example {
 	if m != nil {
 		return m.Examples
 	}
@@ -117,11 +117,11 @@ func (m *ExampleList) GetExamples() []*example_protos_go_proto.Example {
 //     tensorflow/core/example/example.proto
 //     https://developers.google.com/protocol-buffers/docs/proto3#maps
 type ExampleListWithContext struct {
-	Examples             []*example_protos_go_proto.Example `protobuf:"bytes,1,rep,name=examples,proto3" json:"examples,omitempty"`
-	Context              *example_protos_go_proto.Example   `protobuf:"bytes,2,opt,name=context,proto3" json:"context,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}                           `json:"-"`
-	XXX_unrecognized     []byte                             `json:"-"`
-	XXX_sizecache        int32                              `json:"-"`
+	Examples             []*example.Example `protobuf:"bytes,1,rep,name=examples,proto3" json:"examples,omitempty"`
+	Context              *example.Example   `protobuf:"bytes,2,opt,name=context,proto3" json:"context,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
 func (m *ExampleListWithContext) Reset()         { *m = ExampleListWithContext{} }
@@ -149,14 +149,14 @@ func (m *ExampleListWithContext) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ExampleListWithContext proto.InternalMessageInfo
 
-func (m *ExampleListWithContext) GetExamples() []*example_protos_go_proto.Example {
+func (m *ExampleListWithContext) GetExamples() []*example.Example {
 	if m != nil {
 		return m.Examples
 	}
 	return nil
 }
 
-func (m *ExampleListWithContext) GetContext() *example_protos_go_proto.Example {
+func (m *ExampleListWithContext) GetContext() *example.Example {
 	if m != nil {
 		return m.Context
 	}
