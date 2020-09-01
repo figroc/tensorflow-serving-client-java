@@ -3,10 +3,7 @@
 set -e
 cd $(dirname ${BASH_SOURCE[0]})
 
-docker run -t --rm -p 8500:8500 \
-  -v ./tests/data/saved_model_half_plus_two_cpu:/models/half_plus_two \
-  -e MODEL_NAME=half_plus_two \
-  tensorflow/serving &
+docker-compose up -d
 
 function cpp {
   cd cpp
@@ -16,7 +13,7 @@ function java {
   cd java
 }
 
-function wheel {
+function python {
   cd python
 }
 
@@ -26,6 +23,8 @@ function node {
 
 function golang {
   cd go
+  go build
+  ./tfsclient
 }
 
 function mono {
@@ -37,3 +36,5 @@ function rust {
 }
 
 eval "${1}"
+
+docker-compose down -v
