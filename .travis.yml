@@ -10,6 +10,7 @@ addons:
       - grpc
       - mono
       - nuget
+      - openssl
       - pkg-config
       - protobuf
       - rust
