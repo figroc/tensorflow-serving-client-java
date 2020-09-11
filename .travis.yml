@@ -10,7 +10,6 @@ addons:
       - grpc
       - mono
       - nuget
-      - openssl
       - pkg-config
       - protobuf
       - rust
@@ -28,6 +27,9 @@ cache:
 env:
   global:
     - PATH="${PATH}:/usr/local/opt/gettext/bin:${HOME}/go/bin:${HOME}/.cargo/bin"
+    - LDFLAGS="-L/usr/local/opt/openssl@1.1/lib ${LDFLAGS}"
+    - CPPFLAGS="-I/usr/local/opt/openssl@1.1/include ${CPPFLAGS}"
+    - PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig:${PKG_CONFIG_PATH}"
     - GO111MODULE=on
 script:
   - gradle buildAll
