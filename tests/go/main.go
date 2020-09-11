@@ -10,8 +10,8 @@ import (
 )
 
 var (
-	serverAddr = flag.String("server_addr", "127.0.0.1:8500", "The server address in the format of host:port")
-	modelName =  flag.String("model_name", "half_plus_two", "The model name loaded in model serving server")
+	serverAddr = flag.String("r", "127.0.0.1:8500", "grpc endpoint")
+	modelName  = flag.String("m", "half_plus_two",  "model name")
 )
 
 func main() {
@@ -19,21 +19,18 @@ func main() {
 
 	req := &tfs.PredictRequest{
 		ModelSpec: &tfs.ModelSpec{
-			Name:          *modelName,
+			Name: *modelName,
 		},
 		Inputs: map[string]*tff.TensorProto{
 			"x": &tff.TensorProto{
 				Dtype: tff.DataType_DT_FLOAT,
-					TensorShape: &tff.TensorShapeProto{
-						Dim: []*tff.TensorShapeProto_Dim{
-							&tff.TensorShapeProto_Dim{
-								Size: int64(3),
-							},
-							&tff.TensorShapeProto_Dim{
-								Size: int64(1),
-							},
+				TensorShape: &tff.TensorShapeProto{
+					Dim: []*tff.TensorShapeProto_Dim{
+						&tff.TensorShapeProto_Dim{
+							Size: int64(3),
 						},
 					},
+				},
 				FloatVal: []float32{1.0, 2.0, 5.0},
 			},
 		},

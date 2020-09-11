@@ -23,8 +23,7 @@ function node {
 
 function golang {
   cd go
-  go build
-  ./tfsclient
+  go run main.go
 }
 
 function mono {
@@ -35,6 +34,6 @@ function rust {
   cd rust
 }
 
-eval "${1}"
+(eval "${1}")
 
 docker-compose down -v
