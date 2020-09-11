@@ -11,7 +11,7 @@ buildscript {
 ext {
   vers = [tfs: file("VERSION").text.trim(),
           jvm: "8",
-          grpc: "1.32.0",
+          grpc: "1.32.1",
           proto: "3.13.0"]
   dist = [build: "release",
           name: [_: project.name,
