@@ -11,7 +11,7 @@ buildscript {
 ext {
   vers = [tfs: file("VERSION").text.trim(),
           jvm: "8",
-          grpc: "1.32.1",
+          grpc: "1.32.0",
           proto: "3.13.0"]
   dist = [build: "release",
           name: [_: project.name,
@@ -20,6 +20,7 @@ ext {
           version: [_: vers.tfs,
                     major: vers.tfs.tokenize('.').first(),
                     grpc: [_: vers.grpc,
+                           java: "1.32.1",
                            dotnet: vers.grpc.tokenize(".").withIndex().collect{ v, i ->
                                      i == 0 ? ((v as int) + 1) : v
                                    }.join("."),
