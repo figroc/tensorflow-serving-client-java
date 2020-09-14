@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  tfs:
+    image: tensorflow/serving
+    environment:
+      - MODEL_NAME=half_plus_two
+    ports:
+      - 8500:8500
+    volumes:
+      - ./data/saved_model_half_plus_two_cpu:/models/half_plus_two:ro

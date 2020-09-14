@@ -15,11 +15,6 @@ addons:
       - rust
     casks:
       - dotnet-sdk
-install:
-  - | # protobuf@3.12.2
-      git -C $(brew --repo homebrew/core) checkout f13bf9adadfe0525c2f4aaeb18b21c636bd7ce1a
-      brew unlink protobuf && HOMEBREW_NO_AUTO_UPDATE=1 brew install protobuf
-      git -C $(brew --repo homebrew/core) checkout master
 
 before_cache:
   - brew cleanup
@@ -31,7 +26,10 @@ cache:
 
 env:
   global:
+    - CPPFLAGS="-I/usr/local/opt/openssl@1.1/include ${CPPFLAGS}"
+    - LDFLAGS="-L/usr/local/opt/openssl@1.1/lib ${LDFLAGS}"
     - PATH="${PATH}:/usr/local/opt/gettext/bin:${HOME}/go/bin:${HOME}/.cargo/bin"
+    - PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig:${PKG_CONFIG_PATH}"
     - GO111MODULE=on
 script:
   - gradle buildAll
