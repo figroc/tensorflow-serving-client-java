@@ -37,6 +37,18 @@ go     | `gradle golang` | build/go    | [![Publish Status](https://img.shields.
 mono   | `gradle mono`   | build/mono  | [![Publish Status](https://img.shields.io/nuget/v/tensorflow-serving-client)](https://www.nuget.org/packages/tensorflow-serving-client)
 rust   | `gradle rust`   | build/cargo | [![Publish Status](https://img.shields.io/crates/v/tensorflow-serving-client)](https://crates.io/crates/tensorflow-serving-client)
 
+## using docker
+
+Invoke `./build.sh` instead of `gradle` to build artifacts using the docker.
+
+The building container runs as user `gradle` whose UID:GID is 1000:1000.
+It goes well given that the UID:GID pair of the user matches the one in the host OS.
+
+Otherwise you have to configure it manually. There are two approaches you can take either:
+
+1. Create a new user in the host OS to match the UID:GID pair of `gradle`.
+2. Make the dirs `.gradle`, `build` and `obj` in the project root to be world-writable.
+
 ## known issues
 
 * protobuf 3.12.3 is buggy (protocolbuffers/protobuf#7683)
