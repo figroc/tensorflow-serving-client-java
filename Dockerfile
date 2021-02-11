@@ -41,7 +41,7 @@ RUN curl -sSL https://sh.rustup.rs | \
     sh -s -- --default-toolchain stable --profile default --no-modify-path -y
 ENV GRADLE_OPTS="-XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError -Xmx512m" \
     GO111MODULE=on RUSTUP_HOME=/opt/rust/rustup PATH=${PATH}:/opt/rust/cargo/bin
-RUN git clone -b v1.30.x --depth 1 --recurse-submodules --shallow-submodules --progress \
+RUN git clone -b v1.35.x --depth 1 --recurse-submodules --shallow-submodules --progress \
       https://github.com/grpc/grpc.git && \
     cd grpc && mkdir -p cmake/build && cd cmake/build && \
       cmake -DgRPC_INSTALL=ON \

@@ -11,8 +11,8 @@ buildscript {
 ext {
   vers = [tfs: file("VERSION").text.trim(),
           jvm: "8",
-          grpc: "1.32.0",
-          proto: "3.13.0"]
+          grpc: "1.35.0",
+          proto: "3.14.0"]
   dist = [build: "release",
           name: [_: project.name,
                  title: project.name.tokenize("-").collect{it.capitalize()}.join(" "),
@@ -20,15 +20,14 @@ ext {
           version: [_: vers.tfs,
                     major: vers.tfs.tokenize('.').first(),
                     grpc: [_: vers.grpc,
-                           java: "1.32.1",
                            dotnet: vers.grpc.tokenize(".").withIndex().collect{ v, i ->
                                      i == 0 ? ((v as int) + 1) : v
                                    }.join("."),
-                           node: "1.24.0",
-                           rust: "0.6.0"],
+                           node: "1.24.5",
+                           rust: "0.7.1"],
                     proto: [_: vers.proto,
-                            go: "1.4.2",
-                            rust: "2.17.0"]],
+                            go: "1.4.3",
+                            rust: "2.22.0"]],
           license: "Apache-2.0",
           author: [_: "Figroc Chen <figroc@gmail.com>",
                    id: "figroc",
