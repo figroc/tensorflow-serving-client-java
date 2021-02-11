@@ -25,7 +25,7 @@ Grpc tools are needed for building variant packages.
 
 See `.travis.yml` for details.
 
-*NOTE: grpc@1.32 and protobuf@3.13 are required*
+*NOTE: grpc@1.35 and protobuf@3.14 are required*
 
 Target | Command         | Outputs     | Artifacts
 -------|-----------------|-------------|----------------------------------------
