@@ -27,7 +27,7 @@ RUN curl -o mspkg.deb -sSL https://packages.microsoft.com/config/ubuntu/18.04/pa
       dotnet-sdk-3.1 mono-devel msbuild nuget && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-    echo 'deb https://deb.nodesource.com/node_14.x bionic main' >/etc/apt/sources.list.d/nodesource.list && \
+    echo 'deb https://deb.nodesource.com/node_16.x bionic main' >/etc/apt/sources.list.d/nodesource.list && \
     apt-get update && apt-get install -y \
       nodejs && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
