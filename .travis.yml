@@ -1,8 +1,8 @@
 os: osx
-osx_image: xcode10
 
 addons:
   homebrew:
+    update: true
     packages:
       - go
       - gradle
