@@ -15,9 +15,9 @@ RUN git clone -b release --depth 1 --recurse-submodules --shallow-submodules --p
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys F23C5A6CF475977595C89F51BA6932366A755776 && \
     echo 'deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu bionic main' >/etc/apt/sources.list.d/deadsnakes-ppa.list && \
     apt-get update && apt-get install -y \
-      python3.8 python3.8-dev python3.8-pip && \
+      python3.8 python3.8-dev python3-pip && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    pip --no-cache-dir install -U pip && \
+    pip3 --no-cache-dir install -U pip && \
     pip --no-cache-dir install -U twine
 RUN curl -o mspkg.deb -sSL https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb && \
     dpkg -i mspkg.deb && rm -f mspkg.deb && \
