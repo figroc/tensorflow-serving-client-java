@@ -12,13 +12,13 @@ RUN git clone -b release --depth 1 --recurse-submodules --shallow-submodules --p
     cd CMake && \
       ./bootstrap && make && make install && \
     cd .. && rm -rf CMake
-RUN curl -sSL https://bootstrap.pypa.io/get-pip.py | python3 && \
-    pip --no-cache-dir install -U twine && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys F23C5A6CF475977595C89F51BA6932366A755776 && \
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys F23C5A6CF475977595C89F51BA6932366A755776 && \
     echo 'deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu bionic main' >/etc/apt/sources.list.d/deadsnakes-ppa.list && \
     apt-get update && apt-get install -y \
-      python3.8-dev && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+      python3.8 python3.8-dev python3.8-pip && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    pip --no-cache-dir install -U pip && \
+    pip --no-cache-dir install -U twine
 RUN curl -o mspkg.deb -sSL https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb && \
     dpkg -i mspkg.deb && rm -f mspkg.deb && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF && \
@@ -27,7 +27,7 @@ RUN curl -o mspkg.deb -sSL https://packages.microsoft.com/config/ubuntu/18.04/pa
       dotnet-sdk-3.1 mono-devel msbuild nuget && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-    echo 'deb https://deb.nodesource.com/node_16.x bionic main' >/etc/apt/sources.list.d/nodesource.list && \
+    echo 'deb https://deb.nodesource.com/node_14.x bionic main' >/etc/apt/sources.list.d/nodesource.list && \
     apt-get update && apt-get install -y \
       nodejs && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
