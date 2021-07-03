@@ -1,6 +1,8 @@
+on: [push, pull_request]
 jobs:
-  runs-on: ubuntu-latest
-  container: figroc/tfsclient:build
-  steps:
-    - uses: actions/checkout@v2
-    - run: gradle buildAll
+  main:
+    runs-on: ubuntu-latest
+    container: figroc/tfsclient:build
+    steps:
+      - uses: actions/checkout@v2
+      - run: gradle buildAll
