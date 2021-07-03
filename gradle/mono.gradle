@@ -14,7 +14,7 @@ task mono {
     }
     exec {
       environment buildEnviron(distEnv)
-      commandLine "msbuild", "-t:build;pack", "mono.csproj"
+      commandLine "dotnet", "build", "-t:build;pack", "mono.csproj"
     }
   }
 }

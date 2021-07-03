@@ -1,0 +1,8 @@
+on: [pull_request]
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker pull figroc/tfsclient:build
+      - run: ./build.sh buildAll

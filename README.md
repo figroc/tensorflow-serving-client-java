@@ -1,6 +1,6 @@
 # tensorflow-serving-client
 
-[![Build Status](https://travis-ci.com/figroc/tensorflow-serving-client.svg?branch=master)](https://travis-ci.com/figroc/tensorflow-serving-client)
+![Build Status](https://github.com/figroc/tensorflow-serving-client/actions/workflows/main.yml/badge.svg)
 
 A prebuilt tensorflow serving client from the tensorflow serving proto files.
 
@@ -25,7 +25,7 @@ Grpc tools are needed for building variant packages.
 
 See `.travis.yml` for details.
 
-*NOTE: grpc@1.32 and protobuf@3.13 are required*
+*NOTE: grpc@1.35 and protobuf@3.14 are required*
 
 Target | Command         | Outputs     | Artifacts
 -------|-----------------|-------------|----------------------------------------

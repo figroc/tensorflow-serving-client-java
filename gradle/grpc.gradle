@@ -17,7 +17,7 @@ protobuf {
       path = pathOfExecutable("grpc_cpp_plugin")
     }
     grpc_java {
-      artifact = "io.grpc:protoc-gen-grpc-java:${dist.version.grpc.java}"
+      artifact = "io.grpc:protoc-gen-grpc-java:${vers.grpc}"
     }
     grpc_python {
       path = pathOfExecutable("grpc_python_plugin")
