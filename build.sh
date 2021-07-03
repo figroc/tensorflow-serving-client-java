@@ -4,9 +4,8 @@ set -e
 cd $(dirname ${BASH_SOURCE[0]})
 
 builder="figroc/tfsclient:build"
-if [[ -z "$(docker images -q ${builder})" ]]; then
-  docker build -t ${builder} .
-fi
+
+docker build -t ${builder} --build-arg HTTP_PROXY .
 
 if [[ "$(uname)" != "Darwin" && "$(id -u)" != "1000" ]]; then
   (
@@ -17,5 +16,6 @@ if [[ "$(uname)" != "Darwin" && "$(id -u)" != "1000" ]]; then
   ) 1>&2
 fi
 
-docker run --rm -it -v $(pwd):/work \
-  ${builder} gradle --no-daemon $@
+docker run --rm -it \
+  -e HTTP_PROXY -e GOPROXY -e ALL_PROXY=${HTTP_PROXY} \
+  -v $(pwd):/work ${builder} gradle --no-daemon $@
