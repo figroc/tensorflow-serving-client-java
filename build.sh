@@ -20,6 +20,7 @@ if [[ "$(id -u)" != "1000" ]]; then
     mkdir -p ${d}
     chmod -R go+u ${d}
   done
+  chmod go+u .
 fi
 
 docker run --rm \

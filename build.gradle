@@ -8,6 +8,8 @@ buildscript {
 }
 
 //---export-begin---//
+name = "tensorflow-serving-client"
+
 ext {
   vers = [tfs: file("VERSION").text.trim(),
           jvm: "8",
