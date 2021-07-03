@@ -20,4 +20,4 @@ fi
 
 docker run --rm -it \
   -e HTTP_PROXY -e GOPROXY -e ALL_PROXY=${HTTP_PROXY} \
-  -v $(pwd):/work ${builder} gradle --no-daemon $@
+  -v $(pwd):/work ${builder} gradle --no-daemon "$@"

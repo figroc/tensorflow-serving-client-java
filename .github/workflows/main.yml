@@ -1,8 +1,11 @@
-on: [push, pull_request]
+on: [pull_request]
 jobs:
   main:
     runs-on: ubuntu-latest
-    container: figroc/tfsclient:build
     steps:
       - uses: actions/checkout@v2
-      - run: gradle buildAll
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: figroc/tfsclient:build
+          options: -v ${{ github.workspace }}:/work
+          run: gradle --no-daemon buildAll
