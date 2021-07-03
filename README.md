@@ -1,6 +1,6 @@
 # tensorflow-serving-client
 
-[![Build Status](https://travis-ci.com/figroc/tensorflow-serving-client.svg?branch=master)](https://travis-ci.com/figroc/tensorflow-serving-client)
+![Build Status](https://github.com/figroc/tensorflow-serving-client/actions/workflows/main.yml/badge.svg)
 
 A prebuilt tensorflow serving client from the tensorflow serving proto files.
 
