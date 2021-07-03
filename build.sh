@@ -16,8 +16,9 @@ if [[ "$(uname)" != "Darwin" && "$(id -u)" != "1000" ]]; then
     echo "The building might fail for unable to access dirs:" \
          ".gralde, build and obj."
   ) 1>&2
+  chmod go+u .
 fi
 
-docker run --rm -it --user $(id -u):$(id -g) \
+docker run --rm -it \
   -e HTTP_PROXY -e GOPROXY -e ALL_PROXY=${HTTP_PROXY} \
   -v $(pwd):/work ${builder} gradle --no-daemon "$@"
