@@ -11,7 +11,7 @@ fi
 
 if [[ "$(id -u)" != "1000" ]]; then
   (
-    echo "WARNING: Current user $(id -n)($(id -u):$(id -g))" \
+    echo "WARNING: Current user $(whoami)($(id -u):$(id -g))" \
          "does not match the user gradle(1000:1000) in the container."
     echo "The building might fail for unable to access dirs:" \
          ".gralde, build and obj."
@@ -22,6 +22,6 @@ if [[ "$(id -u)" != "1000" ]]; then
   done
 fi
 
-docker run --rm -it \
+docker run --rm \
   -e HTTP_PROXY -e GOPROXY -e ALL_PROXY=${HTTP_PROXY} \
   -v $(pwd):/work ${builder} gradle --no-daemon "$@"
