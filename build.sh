@@ -18,6 +18,6 @@ if [[ "$(uname)" != "Darwin" && "$(id -u)" != "1000" ]]; then
   ) 1>&2
 fi
 
-docker run --rm -it \
+docker run --rm -it --user $(id -u):$(id -g) \
   -e HTTP_PROXY -e GOPROXY -e ALL_PROXY=${HTTP_PROXY} \
   -v $(pwd):/work ${builder} gradle --no-daemon "$@"
