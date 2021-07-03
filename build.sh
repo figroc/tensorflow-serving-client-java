@@ -23,6 +23,8 @@ if [[ "$(id -u)" != "1000" ]]; then
   chmod go+u .
 fi
 
-docker run --rm \
+workspace=/work/tensorflow-serving-client
+
+docker run --rm -w=${workspace} \
   -e HTTP_PROXY -e GOPROXY -e ALL_PROXY=${HTTP_PROXY} \
-  -v $(pwd):/work ${builder} gradle --no-daemon "$@"
+  -v $(pwd):${workspace} ${builder} gradle --no-daemon "$@"
