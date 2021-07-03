@@ -4,8 +4,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: addnab/docker-run-action@v3
-        with:
-          image: figroc/tfsclient:build
-          options: -v ${{ github.workspace }}:/work
-          run: gradle --no-daemon buildAll
+      - docker run --rm --user $(id -u):$(id -g)
+        -v ${{ github.workspace }}:/work
+        figroc/tfsclient:build
+        gradle --no-daemon buildAll
