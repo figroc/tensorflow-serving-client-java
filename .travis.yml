@@ -4,6 +4,7 @@ services:
   - docker
 
 script:
+  - docker pull figroc/tfsclient:build
   - bash build.sh
 
 branches:

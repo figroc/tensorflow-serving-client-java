@@ -5,7 +5,9 @@ cd $(dirname ${BASH_SOURCE[0]})
 
 builder="figroc/tfsclient:build"
 
-docker build -t ${builder} --build-arg HTTP_PROXY .
+if [[ -z "$(docker images -q ${builder})" ]]; then
+  docker build -t ${builder} --build-arg HTTP_PROXY .
+fi
 
 if [[ "$(uname)" != "Darwin" && "$(id -u)" != "1000" ]]; then
   (
