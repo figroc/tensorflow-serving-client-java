@@ -9,7 +9,7 @@ if [[ -z "$(docker images -q ${builder})" ]]; then
   docker build -t ${builder} --build-arg HTTP_PROXY=${ALL_PROXY} .
 fi
 
-if [[ "$(id -u)" != "1000" ]]; then
+if [[ "$(uname)" != "Darwin" && "$(id -u)" != "1000" ]]; then
   (
     echo "WARNING: Current user $(whoami)($(id -u):$(id -g))" \
          "does not match the user gradle(1000:1000) in the container."
@@ -18,9 +18,9 @@ if [[ "$(id -u)" != "1000" ]]; then
   ) 1>&2
   for d in .gradle build obj; do
     mkdir -p ${d}
-    chmod -R go+u ${d}
+    chmod -R go+rw ${d}
   done
-  chmod go+u .
+  chmod go+rw .
 fi
 
 workspace=/work/tensorflow-serving-client
