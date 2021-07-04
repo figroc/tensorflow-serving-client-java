@@ -3,16 +3,16 @@
   "files": [
     "proto"
   ],
-  "name": "${TFSCLIENT_NAME}",
-  "version": "${TFSCLIENT_VERSION}",
+  "name": "tensorflow-serving-client",
+  "version": "2.5.1",
   "dependencies": {
     "@grpc/proto-loader": "^0.5.6",
-    "@grpc/grpc-js": "^${TFSCLIENT_VERSION_GRPC_NODE}",
-    "protobufjs": "^${TFSCLIENT_VERSION_PROTO_NODE}"
+    "@grpc/grpc-js": "^1.3.2",
+    "protobufjs": "^6.11.2"
   },
-  "description": "${TFSCLIENT_DESCRIPTION}",
-  "homepage": "${TFSCLIENT_URL}",
-  "license": "${TFSCLIENT_LICENSE}",
-  "author": "${TFSCLIENT_AUTHOR}",
-  "repository": "github:${TFSCLIENT_AUTHOR_ID}/${TFSCLIENT_NAME}"
+  "description": "A prebuilt tensorflow serving client from the tensorflow serving proto files",
+  "homepage": "https://github.com/figroc/tensorflow-serving-client",
+  "license": "Apache-2.0",
+  "author": "P Chen <figroc@gmail.com>",
+  "repository": "github:figroc/tensorflow-serving-client"
 }
