@@ -23,7 +23,7 @@ Grpc tools are needed for building variant packages.
  * Install `protobuf-compiler-grpc` and `libprotobuf-dev` on Ubuntu
  * Install `grpc` and `protobuf` on macOS
 
-See `.travis.yml` for details.
+See `Dockerfile` for details.
 
 *NOTE: grpc@1.35 and protobuf@3.14 are required*
 
