@@ -3,18 +3,18 @@ from setuptools import find_packages, setup
 
 
 setup(
-  name=environ["TFSCLIENT_NAME_"],
-  version=environ["TFSCLIENT_VERSION"],
-  packages=find_packages(environ["TFSCLIENT_SOURCE"]),
-  package_dir={"": environ["TFSCLIENT_SOURCE"]},
+  name="tensorflow_serving_client_grpc",
+  version="2.4.1",
+  packages=find_packages("python"),
+  package_dir={"": "python"},
   python_requires=">=3.5",
   install_requires=["grpcio", "protobuf"],
   platforms=["any"],
-  author=environ["TFSCLIENT_AUTHOR_NAME"],
-  author_email=environ["TFSCLIENT_AUTHOR_EMAIL"],
-  license=environ["TFSCLIENT_LICENSE"],
-  url=environ["TFSCLIENT_URL"],
-  description=environ["TFSCLIENT_DESCRIPTION"],
+  author="P Chen",
+  author_email="figroc@gmail.com",
+  license="Apache-2.0",
+  url="https://github.com/figroc/tensorflow-serving-client",
+  description="A prebuilt tensorflow serving client from the tensorflow serving proto files",
   long_description=("This library does not coexist with tensorflow, "
                     "tensorflow-serving and tensorflow-serving-api. "
                     "The official tensorflow-serving-api requires package "

@@ -1,12 +1,3 @@
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath "com.google.protobuf:protobuf-gradle-plugin:0.8.12"
-  }
-}
-
 //---export-begin---//
 ext {
   vers = [tfs: file("VERSION").text.trim(),
@@ -49,58 +40,19 @@ repositories {
   mavenCentral()
 }
 //---export-end---//
+//---export-begin---//
+group = "io.opil"
 
-static def buildEnviron(options, prefix="TFSCLIENT") {
-  return options.collectEntries { k, v ->
-    def key = k == "_" ? prefix : "${prefix}_${k.toUpperCase()}".toString()
-    return (v instanceof Map) ? buildEnviron(v, key) : [(key): v]
-  }
+dependencies {
+  compileOnly "javax.annotation:javax.annotation-api:1.3.2"
+  implementation "com.google.protobuf:protobuf-java:${vers.proto}"
+  implementation "io.grpc:grpc-protobuf:${vers.grpc}"
+  implementation "io.grpc:grpc-stub:${vers.grpc}"
 }
 
-static def pathOfExecutable(name) {
-  def path = "which ${name}".execute()
-  path.waitFor()
-  return path.in.text.trim()
+compileJava {
+  options.debug = dist.build != "release"
 }
-
-apply plugin: "signing"
-
-apply from: "gradle/grpc.gradle"
-apply from: "gradle/cmake.gradle"
-apply from: "gradle/java.gradle"
-apply from: "gradle/wheel.gradle"
-apply from: "gradle/node.gradle"
-apply from: "gradle/golang.gradle"
-apply from: "gradle/mono.gradle"
-apply from: "gradle/rust.gradle"
-
-task buildAll {
-  dependsOn "cmake"
-  dependsOn "java"
-  dependsOn "wheel"
-  dependsOn "node"
-  dependsOn "golang"
-  dependsOn "mono"
-  dependsOn "rust"
-}
-
-apply from: "gradle/ossrh.gradle"
-
-task publishAll {
-  dependsOn "publish"
-  dependsOn "twine"
-  dependsOn "npmjs"
-  dependsOn "nuget"
-  dependsOn "crate"
-}
-
-task __sources__(type: Delete) {
-  dependsOn "__cpp__"
-  dependsOn "__java__"
-  dependsOn "__python__"
-  dependsOn "__node__"
-  dependsOn "__golang__"
-  dependsOn "__csharp__"
-  dependsOn "__rust__"
-  delete ".travis.yml", "build.sh", "update.sh", "Dockerfile", "gradle"
-}
+//---export-end---//
+// @generated
+sourceSets{ main{ java{ srcDir "java" } } }
